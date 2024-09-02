@@ -1,0 +1,222 @@
+/* Importing the Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+/* Applying the Poppins font to all elements */
+* {
+  font-family: Poppins;
+}
+
+/* Styling for the RegisterBody container */
+#RegisterBody {
+  background-color: #230f05;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Adding a blurred background image to RegisterBody using a pseudo-element (::before) */
+#RegisterBody::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(Dulays\ Garden\ Logo.jpg);
+  background-size: contain;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+/* Resetting font-family to Verdana and setting box-sizing to border-box for all elements */
+* {
+  font-family: Verdana;
+  box-sizing: border-box;
+}
+
+/* Styling for the registration form */
+#RegisterForm {
+  opacity: 0.7;
+  min-width: 400px;
+  max-height: 720px;
+  border: 2px solid #DDB790;
+  padding: 20px;
+  background: #ddb790;
+  border-radius: 15px;
+  overflow-y: scroll;
+}
+
+/* Hover effect and glow animation for the registration form */
+#RegisterForm:hover {
+  box-shadow: 0 0 20px 5px #7c3714;
+  animation: glow 1.5s infinite alternate;
+}
+
+/* Keyframes for the glow animation */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px 5px #7c3714;
+  }
+  100% {
+    box-shadow: 0 0 20px 10px #7c3714;
+  }
+}
+
+/* Styling for the registration header */
+#RegisterHeader {
+  font-size: 200%;
+  margin-top: 10px;
+  font-family: 'Lora';
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4E2009;
+}
+
+/* Styling for registration input fields */
+.RegisterInput {
+  display: block;
+  border: 2px solid #966E44;
+  border-radius: 15px;
+  width: 89%;
+  padding: 10px;
+  margin: 10px auto;
+  margin-bottom: 0%;
+  caret-color: #643E2C;
+}
+#register{
+    margin-top: 54.5px;
+    padding: 3.5%;
+    font-size: 14px;
+    font-family: Verdana;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+/* Styling for registration input placeholder text */
+.RegisterInput::placeholder {
+  color: #966E44;
+}
+
+/* Styling for focused registration input */
+.RegisterInput:focus {
+  border: 2px solid #4E2009;
+  outline: none;
+}
+
+/* Hover effect and glow animation for registration input */
+.RegisterInput:hover {
+  box-shadow: 0 0 5px 5px #7c3714;
+  animation: glow 1.5s infinite alternate;
+}
+
+/* Keyframes for the glow animation */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px 5px #7c3714;
+  }
+  100% {
+    box-shadow: 0 0 10px 10px #7c3714;
+  }
+}
+
+/* Styling for the RegShow element */
+#RegShow {
+  display: block;
+  float: right;
+  font-size: 80%;
+  color: #643E2C;
+  margin-right: 20px;
+}
+
+/* Styling for registration label */
+.RegisterLabel {
+  color: #4E2009;
+  font-size: 90%;
+  padding: 10px;
+  font-weight: 399;
+  margin-bottom: 0%;
+}
+
+/* Styling for the ConfirmButton */
+.ConfirmButton  {
+  display: block;
+  float: right;
+  background: #643E2C;
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 5px;
+  margin-right: 8px;
+  border: none;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.ConfirmButton a{
+  text-decoration: none;
+  outline:none;
+  color: #fff;
+}
+
+
+
+/* Hover effect for ConfirmButton */
+#ConfirmButton:hover {
+  opacity: .7;
+}
+
+/* Styling for error messages */
+.error2 {
+  background: #f2dede;
+  color: #a94442;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+}
+
+/* Styling for scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Styling for scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  height: 50px;
+  margin: 30px 0;
+  background: var(--green);
+  position: relative;
+}
+
+/* Styling for scrollbar track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  margin: 30px 10px;
+}
+
+/* Responsive Design */
+/* @media (max-width: 600px) {
+  #RegisterForm {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #RegisterHeader {
+    font-size: 150%;
+  }
+
+  .RegisterInput {
+    width: 100%;
+  }
+
+  .ConfirmButton {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+} */

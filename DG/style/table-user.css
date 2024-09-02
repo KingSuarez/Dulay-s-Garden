@@ -1,0 +1,54 @@
+
+
+
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    min-width: 100px;
+    
+  
+ }
+ thead th{
+    position:sticky;
+    top: 0;
+    background-color: var(--light-bg);
+    color: black;
+    font-size: 20px;
+    
+ }
+ 
+ th,td{
+    border-bottom: 1px solid #000;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 15px;
+    /* text-transform: uppercase; */
+    font-family: 'Rubik', sans-serif;
+}
+td{
+    font-family: Rubik,Regular 200;
+    font-weight: 500;
+    max-width: 100%;        /* Set the maximum width to 100% of the parent container */
+    width: auto;            /* Allow the width to adjust dynamically */
+    white-space: nowrap;    /* Prevents the text from wrapping to the next line */
+    overflow: hidden;  
+}
+
+img{
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+
+ }
+
+tr:hover td{
+    cursor: pointer;
+    background-color: #F9EFDB;
+}
+
+
+
+
+

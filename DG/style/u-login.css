@@ -1,0 +1,255 @@
+/* Importing the Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+/* Applying the Poppins font to all elements */
+* {
+  font-family: Poppins;
+  box-sizing: border-box;
+}
+
+/* Styling for the LoginBody container */
+#LoginBody {
+  background-color: #230f05;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* Adding a blurred background image to LoginBody using a pseudo-element (::before) */
+#LoginBody::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../Images/Dulays\ Garden\ Logo.jpg);
+  background-size: contain;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+/* Styling for the login form */
+#LoginForm {
+  opacity: 0.7;
+  width: 400px;
+  border: 2px solid #DDB790;
+  padding: 30px;
+  background: #DDB790;
+  border-radius: 15px;
+  box-shadow: none;
+}
+
+/* Hover effect and glow animation for the login form */
+#LoginForm:hover {
+  box-shadow: 0 0 20px 5px #7c3714;
+  animation: glow 1.5s infinite alternate;
+}
+
+/* Keyframes for the glow animation */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px 5px #7c3714;
+  }
+  100% {
+    box-shadow: 0 0 20px 10px #7c3714;
+  }
+}
+
+/* Styling for the login header */
+#LoginHeader {
+  font-family: 'Lora';
+  text-align: center;
+  margin-bottom: 40px;
+  color: #4E2009;
+}
+
+/* Styling for the container1 */
+#Container1 {
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for DulaysGarden image */
+#DulaysGarden {
+  width: 30%;
+  clip-path: circle();
+}
+
+/* Styling for login input fields */
+.LoginInput {
+  display: block;
+  border: 2px solid #966E44;
+  caret-color: #4E2009;
+  border-radius: 15px;
+  width: 95%;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+/* Styling for focused login input */
+.LoginInput:focus {
+  border: 2px solid #4E2009;
+  outline: none;
+}
+
+/* Hover effect and glow animation for login input */
+.LoginInput:hover {
+  box-shadow: 0 0 5px 5px #7c3714;
+  animation: glow 1.5s infinite alternate;
+}
+
+/* Styling for login input placeholder text */
+.LoginInput::placeholder {
+  color: #715040;
+}
+
+/* Styling for login label */
+.LoginLabel {
+  color: #4E2009;
+  font-size: 100%;
+  padding: 10px;
+}
+
+/* Styling for LogShow element */
+#LogShow {
+  display: block;
+  float: right;
+  size: 1px;
+  font-size: small;
+  color: #643E2C;
+  margin-right: 10px;
+  font-size: 70%;
+}
+
+/* Styling for the LoginShopDirect link */
+.LoginShopDirect {
+  display: flex;
+  justify-content: center;
+  margin: 0%;
+  padding: 0%;
+  outline: none;
+  text-decoration: none;
+  font-size: 90%;
+  color: #4E2009;
+}
+
+/* Hover effect for LoginShopDirect link */
+.LoginShopDirect:hover {
+  color: #7c3714;
+  font-size: 80%;
+}
+
+/* Styling for login button */
+#LoginButton {
+  float: right;
+  background: #4E2009;
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 5px;
+  margin-right: 10px;
+  border: none;
+}
+
+/* Hover effect for login button */
+#LoginButton:hover {
+  opacity: 0.7;
+}
+
+/* Styling for register button */
+#RegisterButton {
+  float: right;
+  background: #4E2009;
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 5px;
+  margin-right: 10px;
+  border: none;
+}
+
+/* Hover effect for register button */
+#RegisterButton:hover {
+  opacity: 0.7;
+}
+
+/* Styling for error messages */
+.error {
+  background: #f2dede;
+  color: #a94442;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+}
+
+/* Styling for validated messages */
+.validated {
+  background: #e0f2de;
+  color: #47a942;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+}
+
+/* Styling for forgot password link */
+.forgot {
+  margin-left: 23%;
+  color: brown;
+}
+
+.forgot:hover {
+  color: red !important; /* Change to red on hover with higher specificity */
+}
+
+/* Styling for text-align center elements */
+.re {
+  text-align: center;
+}
+
+.reg {
+  text-align: center;
+  color: brown;
+}
+
+.reg:hover {
+  color: red;
+}
+
+/* Responsive CSS using media queries */
+@media (max-width: 768px) {
+  /* Adjust margin and font size for smaller screens */
+  .forgot {
+    margin-left: 0;
+    font-size: 80%;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+  }
+
+  #LoginForm {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .LoginInput {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for even smaller screens */
+  .forgot {
+    font-size: 70%;
+  }
+
+  #LoginForm {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .LoginInput {
+    width: 100%;
+  }
+}

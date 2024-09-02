@@ -1,0 +1,29 @@
+
+.update-product form{
+    max-width: 50rem;
+    padding:2rem;
+    margin:0 auto;
+    text-align: center;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    background-color: var(--white);
+    border-radius: .5rem;
+ }
+ 
+ .update-product form img{
+    height: 25rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+ }
+ 
+ .update-product form .box{
+    width: 100%;
+    border:var(--border);
+    background-color: var(--white);
+    border-radius: .5rem;
+    background-color: var(--light-bg);
+    padding:1.2rem 1.4rem;
+    font-size: 1.8rem;
+    color:var(--black);
+    margin:1rem 0;
+ }

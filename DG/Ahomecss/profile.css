@@ -1,0 +1,51 @@
+.update-profile{
+    padding-top: 100px;
+ }
+.update-profile form{
+max-width: 70rem;
+margin: 0 auto;
+background-color: var(--white);
+box-shadow: var(--box-shadow);
+border:var(--border);
+border-radius: .5rem;
+padding:2rem;
+text-align: center;
+}
+
+.update-profile form .flex{
+display: flex;
+gap:1.5rem;
+justify-content: space-between;
+}
+
+.update-profile form .pro_img{
+height: 20rem;
+width: 20rem;
+margin-bottom: 1rem;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.update-profile form .inputBox{
+text-align: left;
+width: 49%;
+}
+
+.update-profile form .inputBox span{
+display: block;
+padding-top: 1rem;
+font-size: 1.8rem;
+color:var(--light-color);
+}
+
+
+.update-profile form .inputBox .box{
+width: 100%;
+padding:1.2rem 1.4rem;
+font-size: 1.8rem;
+color:var(--black);
+border:var(--border);
+border-radius: .5rem;
+margin:1rem 0;
+background-color: rgb(237 200 156);
+}

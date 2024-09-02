@@ -1,0 +1,87 @@
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 5; 
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #ffd9b6;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
+    color: #411c01;
+    top: 15%;
+    left: 20%;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #888;
+    position: absolute;
+    width: 900px;
+    height: auto; /*Could be more or less, depending on screen size */
+    transform: translateY(0);
+    /* background: #ffd9b6;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    z-index: 5;
+    top: 25%;
+    position: fixed;
+    width: 900px;
+    height: 500px;
+    text-align: left; */
+
+}
+/* The Close Button */
+.close {
+    color: #130e0e;
+    float: right;
+    font-size: 28px;
+    font-weight: bolder;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.open-modal-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.open-modal-btn:hover {
+    background-color: #45a049;
+}
+
+
+.Pimage .Mimage{
+    /* margin-top: 30px; */
+    margin-left: 10px;
+    width: 80%;
+    border-radius: 20px;
+    
+}
+
+.Mright{
+    display: block;
+    align-items: center;
+    width: 100%;
+}
+
+.pcontainer{
+    width: 100%;
+    margin-left: -5vh;
+  display: flex;
+  justify-content: space-between;
+}

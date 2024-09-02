@@ -1,0 +1,478 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Stalemate&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*{
+  font-family: Poppins;
+}
+
+body {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to top ,#2c1205,#966E44) ;
+    padding: 0;
+    margin:0;
+    
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0px;
+    background-image: url(../Images/Dulays\ Garden\ Logo.jpg);
+    background-attachment: fixed;
+    background-size:contain;
+    filter: blur(30px);
+    z-index: -1;
+    opacity: 1;
+}
+
+
+
+#PageBody{
+    font-family: MyFontPoppins;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 0;
+    margin:0;
+    width: 1500px;
+    min-width: 800px;
+    max-width: 2000px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#PageBody.activepage{
+    opacity: 1;
+}
+
+/* Referring to div Class <Allup> containing <container> and <Homebar> <HomebarBottom> div classes*/ 
+.allUp{
+    width: 100%;         /* Setting the width to stay at a 100 percent of the size of the parent */
+    position: relative;    /* So Everything within the Container and Homebar/HomebarBottom Stays in the screen even in scrolling down */
+    top: 0;              /* Declaring that the Class sticks at 0 px Away from the top, for the whole element to follow as user scrol down  */
+    z-index: 1;          /* make sures that that is would be on front of all elements */
+    transition: all 0.3s ease;
+}
+
+/* Referring to div Class <container> Containing <Box1> and <Box2> div Classes */
+.container {
+    width: 100%;         /* Setting the width to stay at a 100 percent of the size of the parent */
+    display: flex;
+    justify-content: space-between; /* This evenly spaces the two boxes */
+    background-image: linear-gradient(to right ,#411c01,#966E44) ; /* Display Gradient Background */
+  }
+
+/* Reverfing the image inside the <HomePanelUp> Class */
+#HomePanelUp img{
+    border-radius: 20px; /* Setting the border radius of image 20 px */
+    size: 100%;          /* Setting the size to stay at a 100 percent of the size of the parent */
+}
+
+/* Referring to div Class <Profile> Containing Links such as Signin, Sign up, Profile and  The User Image*/
+#Profile{
+    display: flex;
+}
+
+/* Referring to the links such as Signin, Sign up, Profile inside <Profile> div Class*/
+#Profile a{
+    display:inline-flex;
+    margin-right:15px; /* setting the gap of links 15px right */
+    margin-top: 15px;  /* setting the gap of links 15px from the top*/
+    transition: all 0.3s ease;
+    
+}
+
+/* Referring to the Image inside <Profile> div Class*/
+#Profile img{
+    margin-bottom: 22px;
+    clip-path: circle();
+    size: 100px;
+    transition: transform 0.3s;
+}
+
+#Profile img:hover{
+    cursor: pointer;
+    opacity: 90%;
+    transform: scale(1.1);
+}
+
+
+.Profile-Sub-Menu-Wrap{
+    background: #DDB790;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4); /* Adjust box shadow */
+    border-radius: 20px;
+    z-index: 2;
+    position:absolute;
+    top:37%;
+    right:5%;
+    width: 400px;
+    max-height: 0px;
+    overflow: hidden;
+    transition:max-height 0.5s;
+}
+
+.Profile-Sub-Menu-Wrap.open-menu{
+    max-height: 500px;
+}
+
+.Sub-Menu {
+    color: #2c1205;
+    padding:20px;
+    margin: 10px;
+}
+
+.Sub-Menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background:#2c1205;
+    margin: 15px 0 10px;
+
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+}
+
+.user-info h3{
+    font-weight: 500;
+}
+.user-info img{
+    clip-path: circle();
+    size: 50px;
+    width: 60px;
+    margin-right: 15px;
+}
+
+.Sub-Menu-Link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #2c1205;
+    margin: 12px 0;
+    transition: transform 0.5s;
+}
+.Sub-Menu-Link img{
+    width: 40px;
+}
+
+.Sub-Menu-Link p{
+    margin-left: 5px;
+    width: 100%;
+}
+.Sub-Menu-Link p:hover{
+    font-weight: 600;
+}
+.Sub-Menu-Link span {
+    font-size: 22px;
+}
+
+
+.Sub-Menu-Link:hover{
+    background-color: #ffe0c1;
+    border-radius: 5px;
+    transform: translateX(5px);
+}
+
+
+
+
+/* Referring to div Class Box1 containing the logo picture of dulays gardern */
+.box1 {
+    width: 50%;                 /* Setting the width to be 50% of its parent <Containers> div Class */
+    height:  75px;              /* Adjust the height as needed */
+    padding-left: 2%;           /* Sets Padding to the on the left to prevent content overflow */
+    Margin-top: -6px;           /* adjusting the margin as needed */
+    justify-content: right;      /* align Contents to the right*/
+  }
+
+/* contains the profile image and the links */
+.box2{
+    display: flex;
+    width: 50%;                 /* Setting the width to be 50% of its parent <Containers> div Class */
+    height: 75px;               /* Adjust the height as needed */
+    padding-top: 17px;          /* Contents is 17 px away from the top*/
+    padding-right: 2%;          /* Sets Padding to the on the right to prevent content overflow */
+    justify-content: right;     /* align Contents to the right*/
+    transition: all 0.3s ease;
+  }
+
+  /* Referring to the links such as Signin, Sign up, Profile inside div Class <Box2> */
+.box2 .Reference:hover{
+    transform: scaleX(1.1);         /* Increasing the font size when hovered */
+  }
+
+  /* Referring to Reference class to href (holds the design of all Links) */
+.Reference{
+    text-decoration: none;     /* Resetting default link style */
+    outline: none;
+    color: #DDB790;          /* Setting new font color */
+}
+
+.Reference2{
+    display: flex;
+    text-decoration: none;     /* Resetting default link style */
+    outline: none;
+    color: #764208;          /* Setting new font color */
+}
+ /* Reffering to div Class <Homebar> Containing uls and lis */
+.HomeBar{   
+    margin-top: 0%;               /* Adjust the top margin as needed */
+    background-color: #966e4494;  /* changing background color */
+    display: block;               /* Occupies one block */
+    text-align: Center;           /* Align Center */
+    height: 50px;                 /* Adjust Height as needed */
+    position: static;
+}
+
+
+/* Referring to the unordered list inside div Class <homebar> */
+.HomeBar ul {
+    margin-top: 0px;                                  /* Adjust the top margin as needed */
+    display: inline-flex;   
+    list-style: none;                                 /* Set the style to non */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;  /* Set font */
+    font-size: 100%;                                  /* Set font-Size */
+
+}
+
+/* Referring to all the list inside div class <homebar> */
+.HomeBar li:hover{
+    transform: scaleX(1.1);
+}
+
+
+/* Referring to the list of unordered list inside div class <homebar> */
+.HomeBar ul li{
+    width: 120 px;              /* Adjust the width as needed */
+    margin:10px;                /* Adjust the margin as needed */
+    padding: 5px;               /* Adjust the padding as needed */
+    
+    transition: all 0.3s ease;
+    
+}
+
+/* Referring to the link inside the list of unordered list inside div Class <homebar> */
+.HomeBar ul li a {
+    text-decoration: none;      /* Resetting default link style */
+    color: #fff
+}
+
+.HomeBar ul li.active {
+    background-color: #7E5535 !important; 
+    border-radius: 5px;
+}
+
+.HomeBar ul li ul li.active {
+    background-color: #af7f5086 !important; 
+    border-radius: 5px;
+}
+
+/* Referring to the unordered list inside the list of unordered list inside div Class <homebar> */
+.HomeBar ul li ul {
+    margin-top: 5px;                 /* Adjust the top margin as needed */
+    background-color: #7E5535;  
+    border-color: #DDB790;
+    border-radius: 20px;
+    display: block; 
+    padding-right: 15px;
+    justify-content: left;
+    text-align: left;
+}
+
+/* Referring to the list of unordered list inside the list of unordered list inside div Class <homebar> */
+.HomeBar ul li ul li  {
+    width: 120 px;                  /* Adjust the width as needed */
+    margin:10px;                    /* Adjust the margin as needed */
+    padding: 3px;
+    margin-left: -10px;                   /* Adjust the padding as needed */
+    background-color: #7E5535;
+}
+
+/* Referring to the list of unordered list inside div Class <homebar> upon mouse hover  */
+.HomeBar ul li:hover{
+    background: #7E5535;           /* Changing the background color to highlight*/
+    border-radius: 5px;              /* Changing border radius to 5px*/
+}
+
+/* Referring to the list of unordered list inside the list of unordered list inside div Class <homebar> upon mouse hover  */
+.HomeBar ul li ul li :hover {
+    background-color: #966E44;   /* Changing the background color to highlight*/
+    border-radius: 5px;             /* Changing border radius to 5px*/
+}
+
+/* Referring to the Uls li a Selected in the the homebar */
+.active{
+    color: aliceblue;
+  }
+
+
+/* Refers to the div Class <Sub-1> containing a Ul li, this class is under Ul li of homebar*/
+.Sub-1 { 
+    display:none;      /* setting display to none */
+    justify-content: center;
+}
+
+/* Refers to the list of unordered list inside div Class <homebar> and also the div class<Sub-1> */
+.HomeBar ul li:hover .Sub-1{
+    display: block;                /* Set the display to block when hovered so the sub1 an the ul and li will stack on top of each other */
+    position: absolute;            /* set position to the element wont be apart of the document */
+    background:#7E5535;
+    border-radius: 20px;         /* Changing the background color to highlight*/
+
+}
+
+
+/* Refers to div Class <Homebarbottom2> containing links, input and Search button */
+.HomebarBottom2{
+    background-color: #DDB790;    /* Set background Color to */
+    width: 100%;                    /* Setting the width to stay at a 100 percent of the size of the parent */
+    height: 40px;                   /* Adjust the height as needed */
+    text-align: center;             /* align text in the middle*/
+    padding-top: 20px;              /* Adjust the top padding as needed */
+}
+
+/* Referring to the links inside div Class <Homebarbottom2>*/
+.HomebarBottom2 a{
+    justify-content:Center;
+    padding-right: 6%;
+    text-decoration: none;   
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 100%; 
+    color:#764208;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Referring to the links inside div Class <Homebarbottom2> when it is hovered*/
+.HomebarBottom2 a:hover{
+    color:#3b2104;
+    font-size: 105%;
+    transition: ease-in-out;
+    text-decoration:underline;
+}
+
+/* Referring to div class <search-container> */
+.search-container {
+    display: inline-flex;
+    margin-top: -20px;
+    float:right;
+    padding-right: 3%;
+    padding-left: 0%;
+  
+}
+
+
+/* Referring to the input */
+/* input{
+    outline: none;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+input:focus{
+    transform-origin: right;
+    transform: scaleX(1.1);
+} */
+/* Referring to the style of input */
+/* input[type="text"] {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 2px solid #966E44;
+    font-size: 16px;
+    width: 150px;
+    margin-right: 5px;
+    color :#2c1205;
+  } */
+
+  .btn {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #411c01;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  
+/* Referring to the button search when it is hovered*/
+  .btn:hover {
+    background-color: #d37e42;
+    transform: scale(1.1); 
+  }
+
+.exit{
+    float:right;
+}
+
+/* Define the styles for the scrollbar */
+/* Width and height */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+    height: 12px; /* Height of the scrollbar */
+  }
+  
+  /* Track (the area where the scrollbar is located) */
+  ::-webkit-scrollbar-track {
+    background: #d6b796; /* Color of the track */
+  }
+  
+  /* Handle (the draggable part of the scrollbar) */
+  ::-webkit-scrollbar-thumb {
+    background: #381705; /* Color of the handle */
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #381705; /* Color of the handle when hovered */
+  }
+
+  .badge{
+    display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+  }
+  
+.badge:empty {
+    display: none;
+  }
+  .btn .badge {
+    position: relative;
+    top: -1px;
+  }
+  
+  
+  .glyphicon-shopping-cart{
+    color: rgb(0, 0, 0);
+  }
+
+
+  .qty{
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 2px solid #966E44;
+    font-size: 16px;
+    width: 150px;
+    margin-right: 5px;
+    color: #2c1205;
+  }

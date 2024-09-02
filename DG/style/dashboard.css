@@ -1,0 +1,248 @@
+:root{
+  --brown: #A0522D;
+  --blue:rgb(134, 151, 194);
+  --green:#27ae60;
+  --orange: #f39c12;
+  --red: #e74c3c;
+  --black: #000000;
+  --light-color: #000000;
+  --white: rgb(255, 255, 255)626;
+  --light-bg: rgb(252, 217, 175);
+  --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+
+*::selection{
+  background-color: var(--blue);
+  color:var(--white);
+}
+
+*::-webkit-scrollbar{
+  height: .5rem;
+  width: 1rem;
+}
+
+*::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb{
+  background-color: #e3b97e;
+}
+
+
+html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+
+
+.disabled{
+  user-select: none;
+  pointer-events: none;
+  opacity: .5;
+}
+
+.btn,
+.delete-btn,
+.option-btn{
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: .5rem;
+  color:var(--white);
+  font-size: 2rem;
+  padding:1.3rem 3rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn{
+  background-color: rgb(60, 189, 60);
+  border: none;
+}
+
+.delete-btn{
+  background-color: var(--red);
+}
+
+.option-btn{
+  background-color: var(--orange);
+}
+
+.btn:hover,
+.delete-btn:hover,
+.option-btn:hover{
+  background-color: rgb(255, 85, 0);
+}
+
+.flex-btn{
+  display: flex;
+  flex-wrap: wrap;
+  gap:1rem;
+}
+
+.flex-btn > *{
+  flex:1;
+}
+
+.title{
+  text-align: center;
+  text-transform: uppercase;
+  color:var(--black);
+  font-size: 3.5rem;
+}
+
+.message{
+  position: sticky;
+  top:0;
+  max-width: 1200px;
+  margin:0 auto;
+  background-color: var(--light-bg);
+  padding:2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:1.5rem;
+  z-index: 10000;
+}
+
+.message span{
+  font-size: 2rem;
+  color:var(--black);
+}
+
+.message i{
+  font-size: 2.5rem;
+  cursor: pointer;
+  color:var(--red);
+}
+
+.message i:hover{
+  color:var(--black);
+}
+
+.empty{
+  padding:1.5rem;
+  background: var(--white);
+  color:var(--red);
+  text-transform: capitalize;
+  border-radius: .5rem;
+  border:2px solid black;
+  font-size: 2rem;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+
+@keyframes fadeIn {
+  0%{
+     transform: translateY(1rem);
+  }
+}
+
+.form-container{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container form{
+  width: 50rem;
+  background-color: var(--white);
+  border-radius: .5rem;
+  box-shadow: var(--box-shadow);
+  border:var(--border);
+  text-align: center;
+  padding:2rem;
+}
+
+.form-container form h3{
+  font-size: 3rem;
+  color:var(--black);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.form-container form .box{
+  width: 100%;
+  margin:1rem 0;
+  border-radius: .5rem;
+  border:var(--border);
+  padding:1.2rem 1.4rem;
+  font-size: 1.8rem;
+  color:var(--black);
+  background-color: var(--light-bg);
+}
+
+.form-container form p{
+  margin-top: 2rem;
+  font-size: 2.2rem;
+  color:var(--light-color);
+}
+
+.form-container form p a{
+  color:var(--green);
+}
+
+.form-container form p a:hover{
+  text-decoration: underline;
+}
+
+#menu-btn{
+  display: none;
+}
+
+
+
+/*-------dashboard-aproduct---------*/
+
+
+
+/* media queries  */
+
+@media (max-width:991px){
+
+  html{
+     font-size: 55%;
+  }
+  
+}
+
+@media (max-width:768px){
+
+  #menu-btn{
+     display: inline-block;
+  }
+
+  .update-profile form .flex{
+     flex-wrap: wrap;
+     gap:0;
+  }
+
+  .update-profile form .flex .inputBox{
+     width: 100%;
+  }
+
+}
+
+@media (max-width:450px){
+
+  html{
+     font-size: 50%;
+  }
+
+  .flex-btn{
+     flex-flow: column;
+     gap:0;
+  }
+
+  .title{
+     font-size: 3rem;
+  }
+  
+}
