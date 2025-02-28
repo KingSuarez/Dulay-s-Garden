@@ -104,7 +104,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="#"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -153,17 +153,17 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h3 style="font-weight: bold;">View by Categories</h3>
 <div class="CategoriesSection_inner">
     <div class="card" id="nth1">
-    <img src="deafult_img\soils.jpg" alt="Seeds" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
+    <img src="deafult_img\Plants.jpg" alt="Seeds" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
     <h1>Plants</h1>
     <p>Welcome to our online garden shop's extensive collection of seeds.<br></p>
     <p><a href="index_plant.php"><button>View Plants</button></a></p>
     </div>
 
     <div class="card" id="nth2">
-    <img src="deafult_img\Plants.jpg" alt="Pots" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
+    <img src="deafult_img\soils.jpg" alt="Pots" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
     <h1>Soil</h1>
     <p>Welcome to our online garden shop's extensive collection of plants.<br></p>
-    <p><a href="index_soil.php"><button>View Soil</button></a></p>
+    <p><a href="index_soil.php"><button>View Soils</button></a></p>
     </div>
 
     <div class="card" id="nth3">
@@ -174,10 +174,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="card" id="nth4">
-    <img src="deafult_img\Fertilizer_Category.jpg" alt="Fertilizers" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
+    <img src="deafult_img\Fertilizer.jpg" alt="Fertilizers" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
     <h1>Fertilizers</h1>
     <p>Welcome to our online garden shop's comprehensive collection of soil and fertilizers.<br></p>
-    <p><a href="index_fertilizer.php"><button class="CatBut" >View Fertilizer</button></a></p>
+    <p><a href="index_fertilizer.php"><button class="CatBut" >View Fertilizers</button></a></p>
     </div>
 </div>
 
@@ -195,7 +195,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php
         $sql = "SELECT * FROM `products`";
         if (!empty($search_query)) {
-            $sql .= " WHERE pname LIKE :search OR detail LIKE :search";
+            $sql .= " WHERE pname LIKE :search OR detail LIKE :search OR careP LIKE :search";
         }
         $sql .= " ORDER BY id DESC";
 
@@ -213,6 +213,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
      <form action="Acart.php" method="POST">
                 <img src="prod/<?= $fetch_products['image']; ?>" alt="Product Image" name="image" class="img"  style="width:100%; object-fit:cover; ">
                 <h1 style="font-size: 24px; font-family:poppins; font-weight:bolder;" class="pname" name="pname"><?= $fetch_products['pname'] ?></h1>
+                <h6 style="padding: 0%;"><?= htmlspecialchars($fetch_products['category']); ?></h6>
                 <h1 style="font-size: medium; background-color:bisque; position:left;">Stock: <?= $fetch_products['stock'] ?></h1>
                 <h6 name="price">₱ <?= $fetch_products['price'] ?></h6>
                 <input type="hidden" name="Product_id" value="<?= $fetch_products['id']; ?>">
@@ -298,10 +299,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
                                 <div class="main-footer-icon-con">
                                   
-                                    <img src="Images\Facebook2.png" alt="" > 
+                                    <!-- <img src="Images\Facebook2.png" alt="" > 
                                    
                                    
-                                    <img src="Images\Email2.png" alt="" > 
+                                    <img src="Images\Email2.png" alt="" >  -->
                                   
                                  
                                 </div>   

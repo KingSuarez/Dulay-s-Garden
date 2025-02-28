@@ -22,18 +22,38 @@ $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 // }         
 
 
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     if (isset($_POST['selected_items'])) {
+//         $_SESSION['checkout_items'] = $_POST['selected_items'];
+//         header("Location: checkout.php");
+//         exit();
+//     } else {
+//         //localhost will display or confirmation
+//     //    echo '<script>alert("Success")</script>';
+//     $_SESSION['show_alert'] = true;
+//     }
+// }
+
+// Initialize alert count if not set
+if (!isset($_SESSION['alert_count'])) {
+    $_SESSION['alert_count'] = 0;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['selected_items'])) {
         $_SESSION['checkout_items'] = $_POST['selected_items'];
         header("Location: checkout.php");
         exit();
     } else {
-        //localhost will display or confirmation
-    //    echo '<script>alert("Success")</script>';
-    $_SESSION['show_alert'] = true;
+        // Set the alert only if the count is less than 10
+        if ($_SESSION['alert_count'] < 2) {
+            $_SESSION['show_alert'] = true;
+            $_SESSION['alert_count']++;  // Increment alert count
+        } else {
+            $_SESSION['show_alert'] = false;
+        }
     }
 }
-
 
 
 if (isset($_POST['Acart'])) {
@@ -82,11 +102,11 @@ if (isset($_POST['Acart'])) {
 
 <style>
  
-.slider {
+ .slider {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 100%;
+    height: auto; /* Make the slider height adjust based on content */
 }
 
 .slides {
@@ -101,8 +121,8 @@ if (isset($_POST['Acart'])) {
 
 .slide img {
     width: 100%;
-    height: 323px;
-    object-fit: contain;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the area while maintaining aspect ratio */
 }
 
 .prev, .next {
@@ -114,15 +134,189 @@ if (isset($_POST['Acart'])) {
     border: none;
     padding: 10px;
     cursor: pointer;
+    z-index: 1; /* Ensure buttons are on top of the images */
 }
 
+/* Position the navigation buttons */
 .prev {
-    left: 25px;
+    left: 20px;
 }
 
 .next {
-    right: 15px;
+    right: 20px;
 }
+
+/* Make the slider responsive using media queries */
+@media (max-width: 768px) {
+    /* Adjust the slider on tablets */
+    .slide img {
+        height: auto; /* Let the image scale based on the screen size */
+    }
+
+    .prev, .next {
+        padding: 8px; /* Reduce button padding */
+    }
+
+    .prev {
+        left: 23px; /* Move the buttons closer to the edges */
+    }
+
+    .next {
+        right: 23px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust the slider on mobile phones */
+    .slider {
+        height: auto; /* Auto height for mobile */
+    }
+
+    .slide img {
+        object-fit: contain; /* Make sure image fits well on mobile */
+    }
+
+    .prev, .next {
+        padding: 5px; /* Reduce button size for mobile */
+        font-size: 12px; /* Smaller font size */
+    }
+
+    .prev {
+        left: 23px;
+    }
+
+    .next {
+        right: 23px;
+    }
+}
+
+/* For small screens (max-width: 480px) */  
+@media only screen and (max-width: 480px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 12px;  
+   zoom: 0.5;  
+
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 16px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}  
+  
+/* For extra small screens (max-width: 320px) */  
+@media only screen and (max-width: 320px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 10px;  
+   zoom: 0.3;  
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 14px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}
+
 </style>
 
  <!-- all contents are within this body Id Pagebody -->
@@ -134,7 +328,7 @@ if (isset($_POST['Acart'])) {
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="Ahome.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -224,32 +418,33 @@ if (isset($_POST['Acart'])) {
     <Section id="CategoriesSection" >
     <h3 style="font-weight: 900;">View by Categories</h3>
 <div class="CategoriesSection_inner">
-    <div class="card" id="nth1">
-    <img src="deafult_img\soils.jpg" alt="Seeds" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
-    <h1>Soils</h1>
-    <p>Welcome to our online garden shop's extensive collection of seeds.<br></p>
-    <p><a href="Asoils.php"><button>View Products</button></a></p>
-    </div>
-
     <div class="card" id="nth2">
     <img src="deafult_img\Plants.jpg" alt="Pots" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
     <h1>Plants</h1>
     <p>Welcome to our online garden shop's extensive collection of plants.<br></p>
-    <p><a href="Aplants.php"><button>View Products</button></a></p>
+    <p><a href="Aplants.php"><button>View Plants</button></a></p>
     </div>
+
+    <div class="card" id="nth1">
+    <img src="deafult_img\soils.jpg" alt="Seeds" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
+    <h1>Soils</h1>
+    <p>Welcome to our online garden shop's extensive collection of seeds.<br></p>
+    <p><a href="Asoils.php"><button>View Soils</button></a></p>
+    </div>
+
 
     <div class="card" id="nth3">
     <img src="deafult_img\pots.jpg" alt="Plants" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
     <h1>Pots</h1>
     <p>Welcome to our online garden shop's extensive collection of pots.<br></p>
-    <p><a href="Apots.php"><button>View Products</button></a></p>
+    <p><a href="Apots.php"><button>View Pots</button></a></p>
     </div>
 
     <div class="card" id="nth4">
     <img src="deafult_img\Fertilizer.jpg" alt="Soil/Fertilizers" class="img" style="width: 100%"><!--Also the image is available at Code Files/HTML and CSS/Product Page/jeans.jpg-->
     <h1>Fertilizers</h1>
     <p>Welcome to our online garden shop's comprehensive collection of soil and fertilizers.<br></p>
-    <p><a href="Afertilizer.php"><button class="CatBut" >View Products</button></a></p>
+    <p><a href="Afertilizer.php"><button class="CatBut" >View Fertilizers</button></a></p>
     </div>
 </div>
 
@@ -264,7 +459,7 @@ if (isset($_POST['Acart'])) {
             <?php
         $sql = "SELECT * FROM `products`";
         if (!empty($search_query)) {
-            $sql .= " WHERE pname LIKE :search OR detail LIKE :search";
+            $sql .= " WHERE pname LIKE :search OR detail LIKE :search OR careP LIKE :search";
         }
         $sql .= " ORDER BY id DESC";
 
@@ -455,7 +650,7 @@ if (isset($_POST['Acart'])) {
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 title: "No Refund!",
-                text: " no-refund.",
+                text: " Please procceed to Cart. Atleast your purchase will ₱100.00 above",
                 icon: "warning",
                 // showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -611,3 +806,4 @@ function cart_count(){
 }
     </script> -->
     </html>
+    

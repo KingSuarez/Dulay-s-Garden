@@ -1,0 +1,63 @@
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Dark translucent background */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #FFDBB5;
+    margin: 5% auto; /* Centered with margin */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    width: 90%; /* Adjust width as needed */
+    max-width: 600px; /* Max width */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add shadow */
+    position: relative; /* Position for close button */
+    max-height: 80vh; /* Maximum height of the modal */
+    overflow-y: auto; /* Enable vertical scroll if needed */
+}
+.btn {
+    background-color: #411c01;
+    color: white;
+    float: right; /* Float button to the right */
+    margin-top: 20px; /* Add some space above the button if needed */
+}
+
+.btn:hover {
+    color: white;
+}
+
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Location Map */
+.location {
+    background-image: url(https://external.fmnl4-1.fna.fbcdn.net/static_map.php?v=2055&theme=dark&ccb=4-4&size=520x396&language=en_US&scale=1&zoom=14&center=14.179062476712%2C121.28703856665&marker_list[0]=14.179062476712%2C121.28703856665&_nc_client_id=profile&_nc_client_caller=CometStaticMap.react);
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the container */
+    height: 300px; /* Height of the map */
+    width: 100%; /* Full width of the container */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below the map */
+}

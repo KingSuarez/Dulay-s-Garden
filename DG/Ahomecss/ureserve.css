@@ -437,7 +437,6 @@ input:focus{
   ::-webkit-scrollbar-thumb:hover {
     background: #381705; /* Color of the handle when hovered */
   }
-
   .badge{
     display: inline-block;
   min-width: 10px;

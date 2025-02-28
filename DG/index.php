@@ -28,6 +28,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Style Sheet for the specific page -->
         <link rel="stylesheet" type="text/css" href="Ahomecss/HomeStyle.css">
+<!-- Bootstrap 3.3.7 JS (add to your HTML file if not already included) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="style/modalfooter.css">
 
         <!-- Title of the Homepage -->
         <title>Dulay's Garden Home</title>
@@ -36,8 +41,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             text-align: center;
         }
     </style>
-
-        <!-- all contents are within this body Id Pagebody -->
     <body >
         <div id="PageBody">
             <!-- div Class Allup contains div Classes such as Container, Homebar and HomebarBottom 1 & 2 -->
@@ -47,7 +50,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="#"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -239,7 +242,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <div class="btnflex">
-                            <button>Follow Us</button>
+                            <button onclick="location.href='https://www.facebook.com/dulaysgarden'">Follow Us</button>
                         </div>
                     </div>
 
@@ -249,79 +252,139 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 <!-- Section Id Home-bottomSection containing Section Class Dulays History -->
                 <section id="Home-BottomSection">
-                    <div class="footer-con">
-                        <img src="Images\Dulaysgardenbanner.jpg" alt="">
-                        <div class="pre-footer-con">
-                            <div class="pre-footer-con-inner">
-                                    <h1>Sow the seeds of excitement!</h1>
-                                    <h4>become a pioneer in our community of plant lovers.</h4>
-                            </div>
-                            <!-- <div class="pre-footer-con-inner2">
-                                <form action="" method="get">
-                                    <input type="text" placeholder="Your email" class="footerinput">
-                                    <button type="submit">Sign-Up</button>
-                                </form>
-                            </div> -->
-                        </div>
-                        <div class="main-footer-con">
-                            <div class="main-footer-con-inner">
-                                <h4>OUR STORY</h4>
-                                <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
-                                <!-- <div class="main-footer-icon-con">
-                                    <img src="Images\Facebook2.png" alt="" >
-                                    <img src="Images\Email2.png" alt="" >
-                                </div>    -->
-                            </div>
-                            <div class="main-footer-con-inner2">
-                                <h4>PLANT GUIDES</h4>
-                                <div class="main-footer-bookntitle-con">
-                                    <img src="Images\Plant-Care.jpg" alt="">
-                                    <div class="main-footer-title-con">
-                                        <h5>Plant-Care</h5><br>
-                                        <p>January 26,2024</p>
-                                    </div>
-                                </div>
-                                <div class="main-footer-bookntitle-con">
-                                <img src="Images\ProperPlacement.jpg" alt="">
-                                    <div class="main-footer-title-con">
-                                        <h5>Plant-Placement</h5><br>
-                                        <p>January 26,2024</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="main-footer-con-inner3">
-                                <h4>PRODUCT CATEGORIES</h4>
-                                <div class="main-footer-categories-con">
-                                    <ul>
-                                        <li>Plants</li>
-                                        <li>Seedlings</li>
-                                        <li>Potters</li>
-                                        <li>Pumice</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="main-footer-con-inner4">
-                                <h4>USEFUL LINKS</h4>
-                                <div class="main-footer-links-con">
-                                    <ul>
-                                        <li><h4>Contact </h4></li><br>
-                                        <div>
-                                        <a href="https://www.messenger.com/t/100057185270623"><i class="fa-brands fa-facebook-messenger fa-2xl"></i> Dulay's Garden </a> <br> <br>
-                                        <a href="https://mail.google.com/mail/u/0/#inbox?compose=new"><i class="fa-solid fa-envelope fa-2xl"></i> Dulay's Garden Email</a>
-                                    </div>
-                                        <br>
-                                        <li>FAQs</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+
+                <div class="footer-con">
+    <img src="Images\Dulaysgardenbanner.jpg" alt="">
+    <div class="pre-footer-con">
+        <div class="pre-footer-con-inner">
+            <h1>Sow the seeds of excitement!</h1>
+            <h4>Become a pioneer in our community of plant lovers.</h4>
+        </div>
+        <!-- <div class="pre-footer-con-inner2">
+            <form action="" method="get">
+                <input type="text" placeholder="Your email" class="footerinput">
+                <button type="submit">Sign-Up</button>
+            </form>
+        </div> -->
+    </div>
+
+    <div class="main-footer-con">
+        <div class="main-footer-con-inner">
+            <h4>OUR STORY</h4>
+            <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
+            <div class="main-footer-icon-con"></div>
+        </div>
+
+        <div class="main-footer-con-inner2">
+            <h4>PLANT GUIDES</h4>
+            <div class="main-footer-bookntitle-con">
+                <img src="Images\Plant-Care.jpg" alt="">
+                <div class="main-footer-title-con">
+                    <h5>Plant-Care</h5><br>
+                    <p>January 26, 2024</p>
+                </div>
+            </div>
+            <div class="main-footer-bookntitle-con">
+                <img src="Images\ProperPlacement.jpg" alt="">
+                <div class="main-footer-title-con">
+                    <h5>Plant-Placement</h5><br>
+                    <p>January 26, 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-footer-con-inner3">
+            <h4>PRODUCT CATEGORIES</h4>
+            <div class="main-footer-categories-con">
+                <ul>
+                    <li>Plants</li>
+                    <li>Seedlings</li>
+                    <li>Potters</li>
+                    <li>Fertilizer</li>
+                </ul>
+            </div>
+<div>
+    <h4>Location</h4>
+ <!-- Button to open the modal -->
+<div class="main-footer-links-con">
+    <a href="#" role="link" style="color: black;" id="openModal">
+        <i class="fa-solid fa-location-dot fa-2xl"></i> Brgy. Dila 4033 Bay, Philippines
+    </a>
+</div>
+
+<!-- Modal Structure -->
+<div id="locationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4>Store Location</h4>
+        <div class="location"></div>
+        <p> Address <br>
+             Brgy. Dila 4033 Bay, Philippines.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=14.179062476712%2C121.28703856665" target="_blank" class="btn">
+            Get Direction
+        </a>
+    </div>
+</div>
+
+</div>
+
+        </div>
+
+        <div class="main-footer-con-inner4">
+            <h4>USEFUL LINKS</h4>
+            <div class="main-footer-links-con">
+                <ul>
+                    <li><h4>Contact</h4></li><br>
+                    <div>
+                        <a style="color: black; text-decoration:none;" >
+                            <i class="fa-solid fa-phone fa-2xl" style="color: black;"></i> +63 917 700 9291 
+                        </a><br> <br>
+                        <a href="https://www.messenger.com/t/100057185270623" role="link" style="color: black;">
+                            <i class="fa-brands fa-facebook-messenger fa-2xl"></i> Dulay's Garden
+                        </a> <br> <br>
+                        <a href="mailto:dulaysgarden@example.com" role="link" style="color: black;">
+                            <i class="fa-solid fa-envelope fa-2xl"></i> Dulay's Garden Email
+                        </a>
                     </div>
+                    <li>FAQs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
                 </section>
         </div>
 </div>
         
     </body>
-    
+    <script>
+  // Get the modal
+var modal = document.getElementById("locationModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#PageBody').classList.add('activepage');

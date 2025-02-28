@@ -177,7 +177,7 @@ input:hover {
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="Ahome.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 

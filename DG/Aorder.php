@@ -472,13 +472,14 @@ $qry->execute([$status]);
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="view_order.php?id=<?= htmlspecialchars($row['id']) ?>">View Order</a>
-                                 <?php if ($row['status'] == 'Pending'): ?> 
+                                <?php if ($row['status'] == 'Pending'): ?> 
                                     <!-- <a class="dropdown-item pay_order" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">Mark as Paid</a> -->
-                                 <?php endif; ?>
-                                <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">
+                                <?php endif; ?>
+                                <!-- <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">
                                     <span class="fa fa-trash text-danger"></span> Delete
-                                </a>
+                                </a> -->
                             </div>
+
                         </td>
 
                         </tr>
@@ -496,22 +497,7 @@ $qry->execute([$status]);
 </section>
 </section>
 
-<!-- Include your JavaScript here for handling the modal actions -->
-<script>
-    $(document).ready(function () {
-        $('#orderTable').DataTable();
-        
-        // $('.pay_order').click(function(){
-        //     var id = $(this).data('id');
-        //     // Your pay order logic here
-        // });
-        
-        $('.delete_data').click(function(){
-            var id = $(this).data('id');
-            // Your delete order logic here
-        });
-    });
-</script>
+
 
 <script>
 
@@ -541,19 +527,39 @@ $(document).ready(function() {
 </script>
 
 <script>
-    $(document).on('click', '.pay_order', function() {
-        var orderId = $(this).data('id');
-        if (confirm('Mark this order as paid?')) {
-            window.location.href = 'mark_paid.php?id=' + orderId;
-        }
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete_data');
 
-    $(document).on('click', '.delete_data', function() {
-        var orderId = $(this).data('id');
-        if (confirm('Are you sure you want to delete this order?')) {
-            window.location.href = 'delete_order.php?id=' + orderId;
-        }
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-id');
+
+            if (confirm('Are you sure you want to delete this order?')) {
+                fetch('delete_order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${orderId}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === 'success') {
+                        alert('Order deleted successfully.');
+                        location.reload(); // Refresh the page to update the order list
+                    } else {
+                        alert('Failed to delete the order. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the order.');
+                });
+            }
+        });
     });
+});
+
 </script>
 
 <script>

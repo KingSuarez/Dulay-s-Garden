@@ -216,27 +216,52 @@ if (!isset($admin_id)) {
 <br><br>
     <!-- Sales Report Section -->
     <section>
-        <?php 
-        $date_start = isset($_GET['date_start']) ? $_GET['date_start'] : date("Y-m-d", strtotime("-7 days"));
-        $date_end = isset($_GET['date_end']) ? $_GET['date_end'] : date("Y-m-d");
-        ?>
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h1 class="card-title" style="font-size: large;">Sales Report</h1>
-                <hr>
-                <br>
-            </div>
-            <div class="card-body">
+    <?php 
+    // Set date filters
+    $date_start = isset($_GET['date_start']) ? $_GET['date_start'] : date("Y-m-d", strtotime("-7 days"));
+    $date_end = isset($_GET['date_end']) ? $_GET['date_end'] : date("Y-m-d");
+
+    // Set category filter
+    $category = isset($_GET['category']) ? $_GET['category'] : '';
+
+    // Fetch distinct categories from the products table
+    $categories = $conn->query("SELECT DISTINCT category FROM products")->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+    
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h1 class="card-title" style="font-size: large;">Sales Report</h1>
+            <hr>
+            <br>
+        </div>
+        
+        <div class="card-body">
             <form id="filter-form">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="date_start">Date Start</label>
                         <input type="date" class="form-control form-control-sm" name="date_start" value="<?php echo htmlspecialchars($date_start); ?>">
                     </div>
+                    
                     <div class="form-group">
                         <label for="date_end">Date End</label>
                         <input type="date" class="form-control form-control-sm" name="date_end" value="<?php echo htmlspecialchars($date_end); ?>">
                     </div>
+
+                    <!-- Category Filter -->
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select name="category" class="form-control form-control-sm">
+                            <option value="">All Categories</option>
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?php echo htmlspecialchars($cat['category']); ?>" 
+                                    <?php echo ($category == $cat['category']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($cat['category']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
                     <div class="form-group">
                         <div class="filter-buttons">
                             <button class="btn btn-flat btn-block btn-primary btn-sm">
@@ -250,82 +275,103 @@ if (!isset($admin_id)) {
                 </div>
             </form>
 
-
-                <hr>
-                
-                <!-- Printable Section -->
-                <div id="printable">
-                    <div class="row row-cols-2 justify-content-center align-items-center" id="print_header" style="display:none">
-                        <div class="col-7">
-                            <h3 class="text-center m-0"><b>Sales Report</b></h3>
-                            <p class="text-center m-0">Date Between <?php echo htmlspecialchars($date_start); ?> and <?php echo htmlspecialchars($date_end); ?></p>
-                        </div>
+            <hr>
+            
+            <!-- Printable Section -->
+            <div id="printable">
+                <div class="row row-cols-2 justify-content-center align-items-center" id="print_header" style="display:none">
+                    <div class="col-7">
+                        <h3 class="text-center m-0"><b>Sales Report</b></h3>
+                        <p class="text-center m-0">Date Between <?php echo htmlspecialchars($date_start); ?> and <?php echo htmlspecialchars($date_end); ?></p>
                     </div>
-                    <hr>
-
-                    <table class="table table-bordered">
-                        <colgroup>
-                            <col width="5%">
-                            <col width="15%">
-                            <col width="25%">
-                            <col width="25%">
-                            <col width="10%">
-                            <col width="20%">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Product</th>
-                                <th>Client</th>
-                                <th>QTY</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-
-                            $i = 1;
-                            $qry = $conn->prepare("
-                                SELECT ol.*, o.created_at, p.pname as pname, concat(c.Fname, ' ', c.Lname) as Cname, c.email, p.category 
-                                FROM `order_list` ol 
-                                INNER JOIN `orders` o ON o.id = ol.id  -- Updated column name here
-                                INNER JOIN `products` p ON p.id = ol.p_id  
-                                INNER JOIN `users` c ON c.id = o.user_id 
-                                WHERE date(o.created_at) BETWEEN :date_start AND :date_end 
-                                ORDER BY unix_timestamp(o.created_at) DESC
-                            ");
-                            $qry->execute([
-                                ':date_start' => $date_start,
-                                ':date_end' => $date_end
-                            ]);
-
-                            while ($row = $qry->fetch(PDO::FETCH_ASSOC)){  
-                            ?>
-                                <tr>
-                                    <td class="text-center"><?php echo $i++ ?></td>
-                                    <td><?php echo htmlspecialchars($row['created_at']); ?></td>
-                                    <td>
-                                        <p class="m-0"><?php echo htmlspecialchars($row['pname']); ?></p>
-                                        <p class="m-0"><small>Category: <?php echo htmlspecialchars($row['category']); ?></small></p>
-                                    </td>
-                                    <td>
-                                        <p class="m-0"><?php echo htmlspecialchars($row['Cname']); ?></p>
-                                        <p class="m-0"><small>Email: <?php echo htmlspecialchars($row['email']); ?></small></p>
-                                    </td>
-                                    <td class="text-center"><?php echo htmlspecialchars($row['quantity']); ?></td>
-                                    <td class="text-right"><?php echo number_format($row['total'], 2); ?></td>
-                                </tr>
-                            <?php 
-                            }
-                            ?>
-                        </tbody>
-                    </table>
                 </div>
+                <hr>
+
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="5%">
+                        <col width="15%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="10%">
+                        <col width="20%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Product</th>
+                            <th>Client</th>
+                            <th>QTY</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $i = 1;
+                        $total_amount = 0;  // Initialize the total amount variable
+
+                        // Modify SQL query to include category filtering
+                        $query = "
+                            SELECT ol.*, o.created_at, p.pname as pname, concat(c.Fname, ' ', c.Lname) as Cname, c.email, p.category 
+                            FROM `order_list` ol 
+                            INNER JOIN `orders` o ON o.id = ol.id  
+                            INNER JOIN `products` p ON p.id = ol.p_id  
+                            INNER JOIN `users` c ON c.id = o.user_id 
+                            WHERE date(o.created_at) BETWEEN :date_start AND :date_end
+                        ";
+                        if (!empty($category)) {
+                            $query .= " AND p.category = :category";
+                        }
+                        $query .= " ORDER BY unix_timestamp(o.created_at) DESC";
+
+                        // Prepare and execute query
+                        $qry = $conn->prepare($query);
+                        $params = [
+                            ':date_start' => $date_start,
+                            ':date_end' => $date_end
+                        ];
+
+                        if (!empty($category)) {
+                            $params[':category'] = $category;
+                        }
+
+                        $qry->execute($params);
+
+                        // Fetch and display results
+                        while ($row = $qry->fetch(PDO::FETCH_ASSOC)) {
+                            $total_amount += $row['total'];  // Add each row's total to the grand total
+                        ?>
+                            <tr>
+                                <td class="text-center"><?php echo $i++ ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
+                                <td>
+                                    <p class="m-0"><?php echo htmlspecialchars($row['pname']); ?></p>
+                                    <p class="m-0"><small>Category: <?php echo htmlspecialchars($row['category']); ?></small></p>
+                                </td>
+                                <td>
+                                    <p class="m-0"><?php echo htmlspecialchars($row['Cname']); ?></p>
+                                    <p class="m-0"><small>Email: <?php echo htmlspecialchars($row['email']); ?></small></p>
+                                </td>
+                                <td class="text-center"><?php echo htmlspecialchars($row['quantity']); ?></td>
+                                <td class="text-right"><?php echo number_format($row['total'], 2); ?></td>
+                            </tr>
+                        <?php 
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-right"><strong>Total Amount:</strong></td>
+                            <td class="text-right"><strong><?php echo number_format($total_amount, 2); ?></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 </section>
+
 
 <!-- Footer -->
 <footer>
@@ -338,8 +384,10 @@ if (!isset($admin_id)) {
 $(document).ready(function() {
     $('#printBTN').click(function() {
         let printContent = document.getElementById('printable').innerHTML;
+        let logoSrc = 'Images/IMG_1210 1-1.png'; // Replace with your actual logo path
         let printWindow = window.open('', '', 'height=600,width=800');
-        
+
+        // Modify the content to include the logo at the top
         printWindow.document.write('<html><head><title>Print Report</title>');
         printWindow.document.write('<style>');
         printWindow.document.write('body { text-align: center; font-family: Arial, sans-serif; }');
@@ -348,6 +396,13 @@ $(document).ready(function() {
         printWindow.document.write('th, td { padding: 10px; text-align: center; }');
         printWindow.document.write('</style>');
         printWindow.document.write('</head><body>');
+        
+        // Add the logo at the top before the report content
+        printWindow.document.write('<div style="text-align: center;">');
+        printWindow.document.write('<img src="' + logoSrc + '" alt="Company Logo" style="width: 200px; margin-bottom: 10px;">'); // Adjust size and margin as needed
+        printWindow.document.write('</div>');
+
+        // Add the report content
         printWindow.document.write(printContent);
         printWindow.document.write('</body></html>');
         
@@ -363,6 +418,7 @@ $(document).ready(function() {
 });
 
 </script>
+
 
 <script>
     let sidebar = document.querySelector(".sidebar");

@@ -483,21 +483,7 @@ $qry->execute([$status]);
 </section>
 
 <!-- Include your JavaScript here for handling the modal actions -->
-<script>
-    $(document).ready(function () {
-        $('#orderTable').DataTable();
-        
-        // $('.pay_order').click(function(){
-        //     var id = $(this).data('id');
-        //     // Your pay order logic here
-        // });
-        
-        $('.delete_data').click(function(){
-            var id = $(this).data('id');
-            // Your delete order logic here
-        });
-    });
-</script>
+
 
 <script>
 
@@ -534,12 +520,39 @@ $(document).ready(function() {
     //     }
     // });
 
-    $(document).on('click', '.delete_data', function() {
-        var orderId = $(this).data('id');
-        if (confirm('Are you sure you want to delete this order?')) {
-            window.location.href = 'delete_order.php?id=' + orderId;
-        }
+    document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete_data');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-id');
+
+            if (confirm('Are you sure you want to delete this order?')) {
+                fetch('delete_order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${orderId}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === 'success') {
+                        alert('Order deleted successfully.');
+                        location.reload(); // Refresh the page to update the order list
+                    } else {
+                        alert('Failed to delete the order. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the order.');
+                });
+            }
+        });
     });
+});
+
 </script>
 
 <!-- <script>

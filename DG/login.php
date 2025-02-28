@@ -3,9 +3,9 @@ include 'connection.php';
 
 session_start();
 
-// if(isset($_POST['login'])){
+// if (isset($_POST['login'])) {
 //    $email = $_POST['email'];
-//    $email = filter_var($email, FILTER_SANITIZE_STRING);
+//    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 //    $pass = $_POST['pass'];
 //    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
@@ -16,21 +16,22 @@ session_start();
 
 //    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-//    if($rowCount > 0){
-//       if($row['user_type'] == 'admin'){
-//          $_SESSION['admin_id'] = $row['id'];
-//          header('location:dashboard.php');
-//       }elseif($row['user_type'] == 'user'){
-//          $_SESSION['user_id'] = $row['id'];
-//          header('location:Ahome.php');
-//       }else{
-//          $message[] = 'no user found!';
-//       }
-//    }else{
-//       $message[] = 'incorrect email or password!';
+//    if ($rowCount > 0) {
+//        if ($row['is_verified'] == 1) {
+//            // Redirect verified user to the user home page
+//            $_SESSION['user_id'] = $row['id'];
+//            header('Location: Ahome.php');
+//        } elseif ($row['is_verified'] == 2) {
+//            // Redirect verified admin to the admin dashboard
+//            $_SESSION['admin_id'] = $row['id'];
+//            header('Location: dashboard.php');
+//        } else {
+//             $message[] = 'Please verify your email before logging in.';
+//        }
+//    } else {
+//        $message[] = 'Incorrect email or password!';
 //    }
 // }
-
 
 if (isset($_POST['login'])) {
    $email = $_POST['email'];
@@ -38,30 +39,47 @@ if (isset($_POST['login'])) {
    $pass = $_POST['pass'];
    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
+   // Fetch user by email and password
    $sql = "SELECT * FROM `users` WHERE email = ? AND password = ?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$email, $pass]);
    $rowCount = $stmt->rowCount();
 
+   // Fetch the user record
    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
    if ($rowCount > 0) {
-       if ($row['is_verified'] == 1) {
+       // Check if the user has 3 or more cancelled or unclaimed orders
+       $user_id = $row['id'];
+       $check_orders = $conn->prepare("
+           SELECT COUNT(*) AS cancelled_or_unclaimed_count 
+           FROM `orders` 
+           WHERE user_id = ? 
+           AND status IN ('Cancelled', 'Unclaimed')
+       ");
+       $check_orders->execute([$user_id]);
+       $order_count = $check_orders->fetch(PDO::FETCH_ASSOC)['cancelled_or_unclaimed_count'];
+
+       // If the user has 3 or more cancelled/unclaimed orders, block the user
+       if ($order_count >= 3) {
+           $message[] = 'Your account has been blocked due to multiple cancelled or unclaimed orders.';
+       } elseif ($row['is_verified'] == 1) {
            // Redirect verified user to the user home page
            $_SESSION['user_id'] = $row['id'];
            header('Location: Ahome.php');
+           exit();
        } elseif ($row['is_verified'] == 2) {
            // Redirect verified admin to the admin dashboard
            $_SESSION['admin_id'] = $row['id'];
            header('Location: dashboard.php');
+           exit();
        } else {
-            $message[] = 'Please verify your email before logging in.';
+           $message[] = 'Please verify your email before logging in.';
        }
    } else {
        $message[] = 'Incorrect email or password!';
    }
 }
-
 
 ?>
 
@@ -103,8 +121,8 @@ if(isset($message)){
    foreach($message as $message){
       echo '
       <div class="message">
-         <span>'.$message.'</span>
          <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+         <span>'.$message.'</span>
       </div>
       <br>';
    }

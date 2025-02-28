@@ -12,7 +12,7 @@ $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     
-
+$search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
          
 ?>
 
@@ -106,7 +106,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="#"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -153,7 +153,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div id="whole">
 <section id="CategoriesSection" style="border-radius: 0; margin-top: 0px; ">
 <h3 style="font-family: Tangerine, cursive; color: black; font-size: 40px; text-align:center;">Best-Seller Product</h3>         
-
+<form method="GET" action="" style="text-align: right;">
+    <input type="text" name="search" style="width: 210px;" placeholder="Search Product" value="<?= htmlspecialchars($search_query) ?>">
+    <button type="submit" style="margin-right: 10px; padding: 10px; background-color: #966e4494; color: white; border: none; border-radius: 5px; cursor: pointer;">Search</button>
+</form>
 
 <!-- <h3 style="font-family: Tangerine, cursive; color: black;font-size: 40px; justify-content:center;">All Plants</h3> -->
 
@@ -191,7 +194,7 @@ if ($show_products->rowCount() > 0) {
                 <h6 style="padding: 0%;"><?= htmlspecialchars($fetch_products['category']); ?></h6>
                 <h1 style="font-size: medium; background-color:bisque; position:left;">Stock: <?= htmlspecialchars($fetch_products['stock']); ?></h1>
                 <h6 name="price">₱ <?= htmlspecialchars($fetch_products['price']); ?></h6>
-                <p>Total Sold: <?= htmlspecialchars($fetch_products['total_sold']); ?></p>
+                <p style="font-size: small; margin-bottom:2px;">Total Sold: <?= htmlspecialchars($fetch_products['total_sold']); ?></p>
                 <input type="hidden" name="Product_id" value="<?= htmlspecialchars($fetch_products['id']); ?>">
                 <div style="margin-right: 20px;">
                     <!-- <p><button id="<?= htmlspecialchars($fetch_products['id']); ?>" class="Cart" value="<?= htmlspecialchars($fetch_products['id']); ?>" name="Acart" type="submit">Add To Cart</button></p> -->
@@ -277,10 +280,10 @@ if ($show_products->rowCount() > 0) {
                                 <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
                                 <div class="main-footer-icon-con">
                                   
-                                    <img src="Images\Facebook2.png" alt="" > 
+                                    <!-- <img src="Images\Facebook2.png" alt="" > 
                                    
                                    
-                                    <img src="Images\Email2.png" alt="" > 
+                                    <img src="Images\Email2.png" alt="" >  -->
                                   
                                  
                                 </div>   

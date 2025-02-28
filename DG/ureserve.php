@@ -60,7 +60,7 @@ if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
                                     <!-- icon -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Style sheet for the upper part of the page that is global for all page -->
@@ -225,7 +225,7 @@ if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Ahomepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></a>
+    <a href="Ahome.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -353,19 +353,19 @@ if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
                         <colgroup>
                             <col width="5%">
                             <col width="10%">
-                            <col width="15%">
+                            <!-- <col width="15%"> -->
                             <col width="10%">
                             <col width="10%">
                             <col width="10%">
                             <col width="10%">
                             <col width="10%">
-                            <col width="9%">
+                            <col width="7.05%">
                         </colgroup>
                         <thead >
                             <tr >
                                 <th>#</th>
                                 <th>Date Order</th>
-                                <th>Customer</th>
+                                <!-- <th>Customer</th> -->
                                 <th>Total Amount</th>
                                 <th>Balance</th>
                                 <th>Expiration</th>
@@ -397,11 +397,11 @@ if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
     ?>
     <tr>
         <td class="text-center"><?php echo $i++; ?></td>
-        <td><?php echo htmlspecialchars(date("Y-m-d", strtotime($row['created_at']))); ?></td>
-        <td style="text-transform:capitalize;"><?php echo htmlspecialchars($row['users']); ?></td>
+        <td class="text-center"><?php echo htmlspecialchars(date("Y-m-d", strtotime($row['created_at']))); ?></td>
+        <!-- <td style="text-transform:capitalize;"><?php echo htmlspecialchars($row['users']); ?></td> -->
         <td class="text-center"> ₱ <?php echo number_format($row['amount'],2); ?></td>
         <td class="text-center">₱ <?php echo htmlspecialchars($row['balance'],2); ?></td>
-        <td><?php echo htmlspecialchars(date("Y-m-d", strtotime($row['expiration']))); ?></td>
+        <td class="text-center"><?php echo htmlspecialchars(date("Y-m-d", strtotime($row['expiration']))); ?></td>
 
         <td class="text-center">
             <?php
@@ -507,8 +507,8 @@ if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
                                 <h4>OUR STORY</h4>
                                 <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
                                 <div class="main-footer-icon-con">
-                                    <img src="Images\Facebook2.png" alt="" >
-                                    <img src="Images\Email2.png" alt="" >
+                                    <!-- <img src="Images\Facebook2.png" alt="" >
+                                    <img src="Images\Email2.png" alt="" > -->
                                 </div>   
                             </div>
                             <div class="main-footer-con-inner2">
@@ -543,7 +543,18 @@ if (isset($_POST['cancel_order']) && isset($_POST['order_id'])) {
                                 <h4>USEFUL LINKS</h4>
                                 <div class="main-footer-links-con">
                                     <ul>
-                                        <li>Contact</li>
+                                        <li><h4>Contact</h4></li><br>
+                                        <div>
+                                            <a style="color: black; text-decoration:none;" >
+                                                <i class="fa-solid fa-phone fa-2xl" style="color: black;"></i> +63 917 700 9291 
+                                            </a><br> <br>
+                                            <a href="https://www.messenger.com/t/100057185270623" role="link" style="color: black;">
+                                                <i class="fa-brands fa-facebook-messenger fa-2xl"></i> Dulay's Garden
+                                            </a> <br> <br>
+                                            <a href="mailto:dulaysgarden@example.com" role="link" style="color: black;">
+                                                <i class="fa-solid fa-envelope fa-2xl"></i> Dulay's Garden Email
+                                            </a>
+                                        </div>
                                         <li>FAQs</li>
                                     </ul>
                                 </div>

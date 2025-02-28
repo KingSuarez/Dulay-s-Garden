@@ -25,7 +25,8 @@ if (isset($_POST['reset_password'])) {
                 $stmt->execute([$password, $user_id]);
 
                 if ($stmt->rowCount() > 0) {
-                    $message = "Your password has been reset. You can now <a href='login.php'>login</a>.";
+                    $message = "Your password has been reset. You can now.";
+                    header('location:login.php');
                 } else {
                     $message = "Failed to reset your password. Please try again.";
                 }
@@ -87,7 +88,7 @@ if (isset($_POST['reset_password'])) {
         var hasUpperCase = /[A-Z]/.test(password);
         var hasLowerCase = /[a-z]/.test(password);
         var hasDigit = /\d/.test(password);
-        var hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        var hasSpecialChar = /[\'^£$%&*()}{@#~?><>,|=_+!-]/.test(password);
 
         if (password.length < minLength || !hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialChar) {
             message.textContent = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";

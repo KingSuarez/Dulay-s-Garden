@@ -413,7 +413,6 @@ $qry->execute([$status]);
                     <tbody>
                         <?php
                         $i = 1;
-                        // $qry = $conn->query("SELECT o.*, CONCAT(c.Fname, ' ', c.Lname) AS users FROM `orders` o INNER JOIN users c ON c.id = o.user_id ORDER BY unix_timestamp(o.created_at) DESC");
                         while ($row = $qry->fetch(PDO::FETCH_ASSOC)):
                         ?>
                         <tr>
@@ -529,19 +528,40 @@ $(document).ready(function() {
 </script>
 
 <script>
-    $(document).on('click', '.pay_order', function() {
-        var orderId = $(this).data('id');
-        if (confirm('Mark this order as paid?')) {
-            window.location.href = 'mark_paid.php?id=' + orderId;
-        }
-    });
+  
+    document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete_data');
 
-    $(document).on('click', '.delete_data', function() {
-        var orderId = $(this).data('id');
-        if (confirm('Are you sure you want to delete this order?')) {
-            window.location.href = 'delete_order.php?id=' + orderId;
-        }
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-id');
+
+            if (confirm('Are you sure you want to delete this order?')) {
+                fetch('delete_order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${orderId}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data.trim() === 'success') {
+                        alert('Order deleted successfully.');
+                        location.reload(); // Refresh the page to update the order list
+                    } else {
+                        alert('Failed to delete the order. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the order.');
+                });
+            }
+        });
     });
+});
+
 </script>
 
 <!-- <script>

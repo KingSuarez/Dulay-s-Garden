@@ -460,9 +460,9 @@ $qry->execute([$status]);
                                  <?php if ($row['status'] == 'Pending'): ?> 
                                     <!-- <a class="dropdown-item pay_order" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">Mark as Paid</a> -->
                                  <?php endif; ?>
-                                <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">
+                                <!-- <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">
                                     <span class="fa fa-trash text-danger"></span> Delete
-                                </a>
+                                </a> -->
                             </div>
                         </td>
 

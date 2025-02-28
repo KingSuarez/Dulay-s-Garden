@@ -162,9 +162,8 @@ if(!isset($user_id)){
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1">
-
                                     <!-- icon -->
-                                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Style sheet for the upper part of the page that is global for all page -->
         <link rel="stylesheet" type="text/css" href="Ahomecss/All-Style.css">
@@ -172,6 +171,10 @@ if(!isset($user_id)){
 
         <!-- Style Sheet for the specific page -->
         <link rel="stylesheet" type="text/css" href="Ahomecss/HomeStyle.css">
+<!-- Bootstrap 3.3.7 JS (add to your HTML file if not already included) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="style/modalfooter.css">
 
         <!-- Title of the Homepage -->
         <title>Dulay's Garden Home</title>
@@ -179,6 +182,134 @@ if(!isset($user_id)){
         .Pn{
             text-align: center;
         }
+        
+/* For small screens (max-width: 480px) */  
+@media only screen and (max-width: 480px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 12px;  
+   zoom: 0.5;  
+
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 16px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}  
+  
+/* For extra small screens (max-width: 320px) */  
+@media only screen and (max-width: 320px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 10px;  
+   zoom: 0.3;  
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 14px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}
+
     </style>
 
         <!-- all contents are within this body Id Pagebody -->
@@ -389,7 +520,7 @@ if(!isset($user_id)){
                             </div>
                         </div>
                         <div class="btnflex">
-                            <button>Follow Us</button>
+                        <button onclick="location.href='https://www.facebook.com/dulaysgarden'">Follow Us</button>
                         </div>
                     </div>
 
@@ -443,9 +574,33 @@ if(!isset($user_id)){
                                         <li>Plants</li>
                                         <li>Seedlings</li>
                                         <li>Potters</li>
-                                        <li>Pumice</li>
+                                        <li>Fertilizer</li>
                                     </ul>
                                 </div>
+                                <div>
+    <h4>Location</h4>
+ <!-- Button to open the modal -->
+<div class="main-footer-links-con">
+    <a href="#" role="link" style="color: black;" id="openModal">
+        <i class="fa-solid fa-location-dot fa-2xl"></i> Brgy. Dila 4033 Bay, Philippines
+    </a>
+</div>
+
+<!-- Modal Structure -->
+<div id="locationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4>Store Location</h4>
+        <div class="location"></div>
+        <p> Address <br>
+             Brgy. Dila 4033 Bay, Philippines.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=14.179062476712%2C121.28703856665" target="_blank" class="btn">
+            Get Direction
+        </a>
+    </div>
+</div>
+
+</div>
                             </div>
                             <div class="main-footer-con-inner4">
                                 <h4>USEFUL LINKS</h4>
@@ -468,6 +623,34 @@ if(!isset($user_id)){
         
     </body>
     
+    <script>
+  // Get the modal
+var modal = document.getElementById("locationModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#PageBody').classList.add('activepage');

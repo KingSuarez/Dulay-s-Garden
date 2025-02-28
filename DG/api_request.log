@@ -1,0 +1,1 @@
+{"url":"https:\/\/api.paymongo.com\/v1\/links","postfields":"{\"data\":{\"attributes\":{\"amount\":60000,\"description\":\"Order #179\",\"remarks\":\"Payment for order\"}}}","headers":["accept: application\/json","authorization: Basic WU9VUl9QQVlNT05HT19BUElfS0VZOg==","content-type: application\/json"]}

@@ -10,15 +10,25 @@ if(!isset($user_id)){
    header('location:login.php');
 }
 
+
+// Initialize alert count if not set
+if (!isset($_SESSION['alert_count'])) {
+    $_SESSION['alert_count'] = 0;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['selected_items'])) {
         $_SESSION['checkout_items'] = $_POST['selected_items'];
         header("Location: checkout.php");
         exit();
     } else {
-        //localhost will display or confirmation
-    //    echo '<script>alert("Success")</script>';
-    $_SESSION['show_alert'] = true;
+        // Set the alert only if the count is less than 10
+        if ($_SESSION['alert_count'] < 1) {
+            $_SESSION['show_alert'] = true;
+            $_SESSION['alert_count']++;  // Increment alert count
+        } else {
+            $_SESSION['show_alert'] = false;
+        }
     }
 }
 
@@ -113,6 +123,134 @@ $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 .next {
     right: 15px;
 }
+
+/* For small screens (max-width: 480px) */  
+@media only screen and (max-width: 480px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 12px;  
+   zoom: 0.5;  
+
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 16px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}  
+  
+/* For extra small screens (max-width: 320px) */  
+@media only screen and (max-width: 320px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 10px;  
+   zoom: 0.3;  
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 14px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}
+
 </style>
 
  <!-- all contents are within this body Id Pagebody -->
@@ -124,7 +262,7 @@ $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="Ahome.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -225,7 +363,7 @@ $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 // Search Filter
 $sql = "SELECT * FROM `products` WHERE category = 'Plant'";
 if (!empty($search_query)) {
-    $sql .= " AND (pname LIKE :search OR detail LIKE :search)";
+    $sql .= " AND (pname LIKE :search OR detail LIKE :search OR careP LIKE :search)";
 }
 $sql .= " ORDER BY id DESC";
 

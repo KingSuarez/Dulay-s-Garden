@@ -88,36 +88,42 @@ if ($order_id > 0) {
         <span class="logo_name" style="color: darkgreen;">Dulay's <span style="margin-left: 10px; color:darkgreen">Garden</span></span>
     </div>
     <ul class="nav-links">
-        <li>
-            <a href="dashboard.php">
-                <i class='bx bx-box'></i>
-                <span class="links_name">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="product.php">
-                <i class='bx bx-store'></i>
-                <span class="links_name">Product</span>
-            </a>
-        </li>
-        <li>
-            <a href="info_up.php">
-                <i class='bx bx-id-card'></i>
-                <span class="links_name">Update-profile</span>
-            </a>
-        </li>
-        <li>
-            <a href="AorderPe.php">
-                <i class='bx bxs-box'></i>
-                <span class="links_name">Reserve Order</span>
-            </a>
-        </li>
-        <li>
-            <a href="user_a.php">
-                <i class='bx bxs-user-account'></i>
-                <span class="links_name">Users</span>
-            </a>
-        </li>
+    <li>
+      <a href="dashboard.php">
+        <i class='bx bx-box' ></i>
+        <span class="links_name">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href="product.php">
+        <i class='bx bx-store' ></i>
+        <span class="links_name">Product</span>
+      </a>
+    </li>
+    <li>
+      <a href="info_up.php">
+        <i class='bx bx-id-card' ></i>
+        <span class="links_name">Update-profile</span>
+      </a>
+    </li>
+    <li>
+      <a href="Aorder.php">
+        <i class='bx bxs-box' ></i>
+        <span class="links_name">Reserve Order</span>
+      </a>
+    </li>
+    <li>
+      <a href="sales.php">
+        <i class='bx bx-trending-up'></i>
+        <span class="links_name">Sales Report</span>
+      </a>
+    </li>
+    <li>
+      <a href="user_a.php">
+        <i class='bx bxs-user-account' ></i>
+        <span class="links_name">Users</span>
+      </a>
+    </li>
         <li class="log_out">
             <a href="logout.php">
                 <i class='bx bx-log-out'></i>

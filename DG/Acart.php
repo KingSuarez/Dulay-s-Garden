@@ -152,17 +152,151 @@ if(isset($_GET['delete'])){
     <link rel="stylesheet" type="text/css" href="Ahomecss/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="Ahomecss/styles.css">
 
+<!-- Bootstrap 3.3.7 JS (add to your HTML file if not already included) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Style Sheet for the specific page -->
     <link rel="stylesheet" type="text/css" href="Ahomecss/Categories-Style.css">
     <!-- Style sheet for the upper part of the page that is global for all page -->
     <link rel="stylesheet" type="text/css" href="Ahomecss/All-Style.css">
     <link rel="stylesheet"  type="text/css" href="Ahomecss/HomeStyle.css">
-
+<!-- <link rel="stylesheet" href="style/modalfooter.css"> -->
     <!-- Title of the Homepage -->
     <title>Dulay's Cart Shop</title>
-</head>
 
+</head>
+<style>
+    /* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Dark translucent background */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #FFDBB5;
+    margin: 5% auto; /* Centered with margin */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    width: 90%; /* Adjust width as needed */
+    max-width: 600px; /* Max width */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add shadow */
+    position: relative; /* Position for close button */
+    max-height: 80vh; /* Maximum height of the modal */
+    overflow-y: auto; /* Enable vertical scroll if needed */
+}
+
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Location Map */
+.location {
+    background-image: url(https://external.fmnl4-1.fna.fbcdn.net/static_map.php?v=2055&theme=dark&ccb=4-4&size=520x396&language=en_US&scale=1&zoom=14&center=14.179062476712%2C121.28703856665&marker_list[0]=14.179062476712%2C121.28703856665&_nc_client_id=profile&_nc_client_caller=CometStaticMap.react);
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the container */
+    height: 300px; /* Height of the map */
+    width: 100%; /* Full width of the container */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below the map */
+}
+
+
+/* For small screens (max-width: 480px) */  
+@media only screen and (max-width: 480px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 12px;  
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 16px;  
+  }  
+  .main-cart {  
+   width: 100%;  
+  }  
+  .container-fluid {  
+   width: 100%;  
+  }  
+  .row {  
+   flex-direction: column;  
+  }  
+  .col-md-2, .col-md-8 {  
+   width: 100%;  
+  }  
+  .panel {  
+   width: 100%;  
+  }  
+  .panel-heading {  
+   width: 100%;  
+  }  
+  .panel-footer {  
+   width: 100%;  
+  }  
+  /* Zoom out the content to fit on mobile devices */  
+  body {  
+   zoom: 0.5;  
+  }  
+}  
+  
+/* For extra small screens (max-width: 320px) */  
+@media only screen and (max-width: 320px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 10px;  
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 14px;  
+  }  
+  .main-cart {  
+   width: 100%;  
+  }  
+  .container-fluid {  
+   width: 100%;  
+  }  
+  .row {  
+   flex-direction: column;  
+  }  
+  .col-md-2, .col-md-8 {  
+   width: 100%;  
+  }  
+  .panel {  
+   width: 100%;  
+   flex-direction: row;  
+
+  }  
+  .panel-heading {  
+   width: 100%;  
+  }  
+  .panel-footer {  
+   width: 100%;  
+  }  
+  /* Zoom out the content to fit on mobile devices */  
+  body {  
+   zoom: 0.3;  
+  }  
+}
+
+</style>
  <!-- all contents are within this body Id Pagebody -->
 <body>
 <div id="PageBody">
@@ -172,7 +306,7 @@ if(isset($_GET['delete'])){
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="Ahome.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -330,81 +464,111 @@ if(isset($_GET['delete'])){
 
 <div id="whole">
 
-    <div class="footer-con">
-                        <img src="Images\Dulaysgardenbanner.jpg" alt="">
-                        <div class="pre-footer-con">
-                            <div class="pre-footer-con-inner">
-                                    <h1>Sow the seeds of excitement!</h1>
-                                    <h4>become a pioneer in our community of plant lovers.</h4>
-                            </div>
-                            <!-- <div class="pre-footer-con-inner2">
-                                <form action="" method="get">
-                                    <input type="text" placeholder="Your email" class="footerinput">
-                                    <button type="submit">Sign-Up</button>
-                                </form>
-                            </div> -->
-                        </div>
-                        <div class="main-footer-con">
-                            <div class="main-footer-con-inner">
-                                <h4>OUR STORY</h4>
-                                <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
-                                <div class="main-footer-icon-con">
-                                  
-                                    <img src="Images\Facebook2.png" alt="" > 
-                                   
-                                   
-                                    <img src="Images\Email2.png" alt="" > 
-                                  
-                                 
-                                </div>   
-                            </div>
-                            <div class="main-footer-con-inner2">
-                                <h4>PLANT GUIDES</h4>
-                                <div class="main-footer-bookntitle-con">
-                                    <img src="Images\Plant-Care.jpg" alt="">
-                                    <div class="main-footer-title-con">
-                                        <h5>Plant-Care</h5><br>
-                                        <p>January 26,2024</p>
-                                    </div>
-                                </div>
-                                <div class="main-footer-bookntitle-con">
-                                <img src="Images\ProperPlacement.jpg" alt="">
-                                    <div class="main-footer-title-con">
-                                        <h5>Plant-Placement</h5><br>
-                                        <p>January 26,2024</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="main-footer-con-inner3">
-                                <h4>PRODUCT CATEGORIES</h4>
-                                <div class="main-footer-categories-con">
-                                    <ul>
-                                        <li>Plants</li>
-                                        <li>Seedlings</li>
-                                        <li>Potters</li>
-                                        <li>Pumice</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="main-footer-con-inner4">
-                                <h4>USEFUL LINKS</h4>
-                                <div class="main-footer-links-con">
-                                    <ul>
-                                    <li><h4>Contact </h4></li><br>
-                                        <div>
-                                        <a href="https://www.messenger.com/t/100057185270623"><i class="fa-brands fa-facebook-messenger fa-2xl"></i> Dulay's Garden </a> <br> <br>
-                                        <a href="https://mail.google.com/mail/u/0/#inbox?compose=new"><i class="fa-solid fa-envelope fa-2xl"></i> Dulay's Garden Email</a>
-                                    </div>
-                                        <li>FAQs</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+<div class="footer-con">
+    <img src="Images\Dulaysgardenbanner.jpg" alt="">
+    <div class="pre-footer-con">
+        <div class="pre-footer-con-inner">
+            <h1>Sow the seeds of excitement!</h1>
+            <h4>Become a pioneer in our community of plant lovers.</h4>
+        </div>
+        <!-- <div class="pre-footer-con-inner2">
+            <form action="" method="get">
+                <input type="text" placeholder="Your email" class="footerinput">
+                <button type="submit">Sign-Up</button>
+            </form>
+        </div> -->
+    </div>
+
+    <div class="main-footer-con">
+        <div class="main-footer-con-inner">
+            <h4>OUR STORY</h4>
+            <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
+            <div class="main-footer-icon-con"></div>
+        </div>
+
+        <div class="main-footer-con-inner2">
+            <h4>PLANT GUIDES</h4>
+            <div class="main-footer-bookntitle-con">
+                <img src="Images\Plant-Care.jpg" alt="">
+                <div class="main-footer-title-con">
+                    <h5>Plant-Care</h5><br>
+                    <p>January 26, 2024</p>
+                </div>
+            </div>
+            <div class="main-footer-bookntitle-con">
+                <img src="Images\ProperPlacement.jpg" alt="">
+                <div class="main-footer-title-con">
+                    <h5>Plant-Placement</h5><br>
+                    <p>January 26, 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-footer-con-inner3">
+            <h4>PRODUCT CATEGORIES</h4>
+            <div class="main-footer-categories-con">
+                <ul>
+                    <li>Plants</li>
+                    <li>Seedlings</li>
+                    <li>Potters</li>
+                    <li>Fertilizer</li>
+                </ul>
+            </div>
+<div>
+    <h4>Location</h4>
+ <!-- Button to open the modal -->
+<div class="main-footer-links-con">
+    <a href="#" role="link" style="color: black;" id="openModal">
+        <i class="fa-solid fa-location-dot fa-2xl"></i> Brgy. Dila 4033 Bay, Philippines
+    </a>
+</div>
+
+<!-- Modal Structure -->
+<div id="locationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4>Store Location</h4>
+        <div class="location"></div>
+        <p> Address <br>
+             Brgy. Dila 4033 Bay, Philippines.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=14.179062476712%2C121.28703856665" target="_blank" class="btn btn-primary" 
+        style="background-color: #411c01; color: white; float: right; margin-top: 20px; ">
+            Get Direction
+        </a>
+    </div>
+</div>
+
+</div>
+
+        </div>
+
+        <div class="main-footer-con-inner4">
+            <h4>USEFUL LINKS</h4>
+            <div class="main-footer-links-con">
+                <ul>
+                    <li><h4>Contact</h4></li><br>
+                    <div>
+                        <a style="color: black; text-decoration:none;">
+                            <i class="fa-solid fa-phone fa-2xl" style="color: black;"></i> +63 917 700 9291 
+                        </a><br> <br>
+                        <a href="https://www.messenger.com/t/100057185270623" role="link" style="color: black;">
+                            <i class="fa-brands fa-facebook-messenger fa-2xl"></i> Dulay's Garden
+                        </a> <br> <br>
+                        <a href="mailto:dulaysgarden@example.com" role="link" style="color: black;">
+                            <i class="fa-solid fa-envelope fa-2xl"></i> Dulay's Garden Email
+                        </a>
                     </div>
+                    <li>FAQs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </div>  
  
 </body>
+
 <!-- <script>
     function updateTotal(itemId) {
         // Get the quantity input value
@@ -441,6 +605,35 @@ if(isset($_GET['delete'])){
         document.getElementById('overallTotal').textContent = 'Total: ₱' + overallTotal.toFixed(2);
     }
 </script> -->
+
+<script>
+  // Get the modal
+var modal = document.getElementById("locationModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
 
 <script>
             function subTotal(input) {

@@ -464,9 +464,9 @@ $qry->execute([$status]);
                                  <?php if ($row['status'] == 'Pending'): ?> 
                                     <!-- <a class="dropdown-item pay_order" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">Mark as Paid</a> -->
                                  <?php endif; ?>
-                                <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">
+                                <!-- <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?= htmlspecialchars($row['id']); ?>">
                                     <span class="fa fa-trash text-danger"></span> Delete
-                                </a>
+                                </a> -->
                             </div>
                         </td>
 
@@ -529,12 +529,12 @@ $(document).ready(function() {
 </script>
 
 <script>
-    $(document).on('click', '.pay_order', function() {
-        var orderId = $(this).data('id');
-        if (confirm('Mark this order as paid?')) {
-            window.location.href = 'mark_paid.php?id=' + orderId;
-        }
-    });
+    // $(document).on('click', '.pay_order', function() {
+    //     var orderId = $(this).data('id');
+    //     if (confirm('Mark this order as paid?')) {
+    //         window.location.href = 'mark_paid.php?id=' + orderId;
+    //     }
+    // });
 
     $(document).on('click', '.delete_data', function() {
         var orderId = $(this).data('id');

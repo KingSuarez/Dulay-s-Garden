@@ -11,9 +11,34 @@ if(!isset($admin_id)){
    header('location:login.php');
 }
 
+// Handle AJAX request
+if(isset($_POST['action']) && $_POST['action'] == 'fetchCounts'){
+    // Fetch users count
+    $select_users = $conn->prepare("SELECT * FROM `users` WHERE user_type = ?");
+    $select_users->execute(['user']);
+    $number_of_users = $select_users->rowCount();
+ 
+    // Fetch products count
+    $select_product = $conn->prepare("SELECT * FROM `products`");
+    $select_product->execute();
+    $number_of_products = $select_product->rowCount();
+ 
+    // Fetch pending orders count
+    $select_order = $conn->prepare("SELECT * FROM `uorders` WHERE status = ?");
+    $select_order->execute(['pending']);
+    $number_of_orders = $select_order->rowCount();
+ 
+    // Return the counts in JSON format
+    echo json_encode([
+       'users' => $number_of_users,
+       'products' => $number_of_products,
+       'orders' => $number_of_orders
+    ]);
+    exit;
+ }
 
 ?>
-
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
@@ -122,6 +147,8 @@ canvas {
 .btn-primary:hover {
     background-color: #0056b3; /* Hover color for primary button */
 }
+
+
       </style>
 
 </head>
@@ -207,45 +234,22 @@ canvas {
     </div>
   </nav>
 
-  <div class="box-container" id="container">
-
-  
-
-   <div class="box">
-      <?php
-         $select_users = $conn->prepare("SELECT * FROM `users` WHERE user_type = ?");
-         $select_users->execute(['user']);
-         $number_of_users = $select_users->rowCount();
-      ?>
-      <h3><?= $number_of_users; ?></h3>
-      <p>User Accounts</p>
-      
-      </div>
-
-      <div class="box" >
-      <?php
-         $select_product = $conn->prepare("SELECT * FROM `products` ");
-         $select_product->execute();
-         $number_of_products = $select_product->rowCount();
-      ?>
-      <h3><?= $number_of_products; ?></h3>
-         <p>Products</p>
-         
-
+   <div class="box-container" id="container">
+      <div class="box">
+         <h3 id="userCount"></h3>
+         <p>User Accounts</p>
       </div>
 
       <div class="box">
-      <?php
-         $select_order = $conn->prepare("SELECT * FROM `uorders` WHERE status = ? ");
-         $select_order->execute(['pending']);
-         $number_of_orders = $select_order->rowCount();
-      ?>
-      <h3><?= $number_of_orders; ?></h3>
-         <p>Order</p>
+         <h3 id="productCount"></h3>
+         <p>Products</p>
       </div>
-      
 
-</div>
+      <div class="box">
+         <h3 id="orderCount"></h3>
+         <p>Orders</p>
+      </div>
+   </div>
 
  <!-- Sales Section -->
  <div style="display: block; box-sizing: border-box; border: 1px solid #ccc;" width = 100%; height = 25%;>
@@ -270,7 +274,7 @@ canvas {
     </div>
 
     <!-- Sales Chart -->
-    <canvas id="salesChart" width="800" height="400"></canvas>
+    <canvas id="salesChart" width="800" height="200"></canvas>
 
     </div>
 <br> <br> <br>
@@ -282,35 +286,53 @@ canvas {
         <canvas id="myChart1" width="100%" height="50%"></canvas>
     </div> -->
     <div style="border: 1px solid #ccc; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" padding: 10px; margin: 10px;> 
-    <?php
-    $criticalS = $conn->prepare("SELECT pname, stock FROM products WHERE stock < 20");
-    $criticalS->execute();
-    $results = $criticalS->fetchAll(PDO::FETCH_ASSOC); // Fetch all results as an associative array
-    ?>
+<?php
+// Fetch the current threshold from the database
+$stmt = $conn->prepare("SELECT critical_stock FROM critical WHERE id = 1");
+$stmt->execute();
+$setting = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      <h2 style="text-align: center; font-size:18px;"> Critical Stock</h2>
-      <table style="width: 100%; border-collapse: collapse; ">
-        <thead>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <th style="background-color:#ACE1AF; padding: 8px; text-align: center;">Product</th>
-                <th style="background-color:#ACE1AF; padding: 8px; text-align: center;">Stock</th>
-            </tr>
-        </thead>
+// Set the current threshold from the database, default to 20 if not set
+$threshold = $setting['critical_stock'] ?? 20;
+?>
 
-        <tbody>
-            <?php
-            foreach ($results as $row) {
-                echo '<tr>';
-                echo '<td style="padding: 8px; border-bottom: 1px solid #ddd; text-transform: capitalize;">' . htmlspecialchars($row["pname"]) . '</td>';
-                echo '<td style="padding: 8px; border-bottom: 1px solid #ddd;">' . htmlspecialchars($row["stock"]) . '</td>';
-                echo '</tr>';
-            }
-            ?>
+<!-- Display the critical stock threshold with editable input -->
+<h2 style="text-align: center; font-size:18px;">
+    Critical Stock (Threshold: 
+    <span id="thresholdValue" contenteditable="true" style="border-bottom: 1px dashed; display: inline-block; min-width: 30px; text-align: center;">
+        <?php echo $threshold; ?>
+    </span>)
+</h2>
 
-        </tbody>
+<p id="saveStatus" style="color: green; text-align: center;"></p>
 
-    </table>
-        </div>
+<!-- Table to display products below the critical threshold -->
+<table style="width: 100%; border-collapse: collapse;" id="productTable">
+    <thead>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <th style="background-color:#ACE1AF; padding: 8px; text-align: center;">Product</th>
+            <th style="background-color:#ACE1AF; padding: 8px; text-align: center;">Stock</th>
+        </tr>
+    </thead>
+    <tbody id="productData">
+        <?php
+        // SQL query to fetch products below the critical threshold
+        $criticalS = $conn->prepare("SELECT pname, stock FROM products WHERE stock < :threshold");
+        $criticalS->bindParam(':threshold', $threshold, PDO::PARAM_INT);
+        $criticalS->execute();
+        $results = $criticalS->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($results as $row) {
+            echo '<tr>';
+            echo '<td style="padding: 8px; border-bottom: 1px solid #ddd; text-transform: capitalize;">' . htmlspecialchars($row["pname"]) . '</td>';
+            echo '<td style="padding: 8px; border-bottom: 1px solid #ddd;">' . htmlspecialchars($row["stock"]) . '</td>';
+            echo '</tr>';
+        }
+        ?>
+    </tbody>
+</table>
+</div>
+
 <!--     
     <div class="chart" id="chartContainer2">
         <canvas id="myChart2" width="100%" height="60%"></canvas>
@@ -623,6 +645,30 @@ const myChart7 = new Chart(ctx7, {
 
 
 </section>
+<!-- box container -->
+<script>
+      $(document).ready(function(){
+         // Function to fetch counts via AJAX
+         function fetchCounts() {
+            $.ajax({
+               url: 'dashboard.php',
+               type: 'POST',
+               data: { action: 'fetchCounts' },
+               dataType: 'json',
+               success: function(response) {
+                  $('#userCount').text(response.users);
+                  $('#productCount').text(response.products);
+                  $('#orderCount').text(response.orders);
+               }
+            });
+         }
+
+         // Fetch counts on page load
+         fetchCounts();
+         setInterval(fetchCounts, 10000);
+
+      });
+   </script>
 
 <script>
         const ctx = document.getElementById('salesChart').getContext('2d');
@@ -711,6 +757,32 @@ const myChart7 = new Chart(ctx7, {
          
 </script>
 
+<!-- JavaScript to handle the threshold update and auto-refresh the product list -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // When the threshold value is changed
+        $('#thresholdValue').on('blur', function() {
+            var newThreshold = $(this).text().trim();
+
+            // Send the new threshold to the server using AJAX
+            $.ajax({
+                url: 'update_and_fetch.php', // Single PHP file for both update and fetch
+                method: 'POST',
+                data: { threshold: newThreshold },
+                success: function(data) {
+                    $('#saveStatus').text('Threshold updated successfully!').fadeIn().delay(2000).fadeOut();
+
+                    // Update the product table with the new data
+                    $('#productData').html(data);
+                },
+                error: function() {
+                    $('#saveStatus').text('Error updating threshold!').css('color', 'red').fadeIn().delay(2000).fadeOut();
+                }
+            });
+        });
+    });
+</script>
 
 
 <script>

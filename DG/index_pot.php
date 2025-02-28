@@ -2,13 +2,14 @@
 
 include 'connection.php';
 session_start();
+
 // Fetch products from the database
 // $sql = "SELECT * FROM products"; // Assuming you have a products table
 // $stmt = $conn->prepare($sql);
 // $stmt->execute();
 // $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    
+$search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 
          
 ?>
@@ -103,7 +104,7 @@ session_start();
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="#"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -150,18 +151,31 @@ session_start();
 <div id="whole">
 <section id="CategoriesSection" style="border-radius: 0; margin-top: 0px; ">
 <h3 style="font-family: Tangerine, cursive; color: black; font-size: 40px; text-align:center;">All Pots</h3>
-
+<form method="GET" action="" style="text-align: right;">
+    <input type="text" name="search" style="width: 210px;" placeholder="Search Product" value="<?= htmlspecialchars($search_query) ?>">
+    <button type="submit" style="margin-right: 10px; padding: 10px; background-color: #966e4494; color: white; border: none; border-radius: 5px; cursor: pointer;">Search</button>
+</form>
 
   <div class="CategoriesSection_con">
 
                         
   <?php
+  // Search Filter
+  $sql = "SELECT * FROM `products` WHERE category = 'Pot'";
+  if (!empty($search_query)) {
+      $sql .= " AND (pname LIKE :search OR detail LIKE :search OR careP LIKE :search)";
+  }
+  $sql .= " ORDER BY id DESC";
   
-$show_products = $conn->prepare("SELECT * FROM `products` WHERE category = ?");
-$show_products->execute(['Pot']);
-
-if ($show_products->rowCount() > 0) {
-    while ($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)) {
+  $show_products = $conn->prepare($sql);
+  if (!empty($search_query)) {
+      $search_term = '%' . $search_query . '%';
+      $show_products->bindParam(':search', $search_term, PDO::PARAM_STR);
+  }
+  $show_products->execute();
+  
+  if ($show_products->rowCount() > 0) {
+      while ($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)) {
 ?>
      <div class="SpecificProductCard" data-stock="<?= $fetch_products['stock']; ?>" >
          <form action="" method="POST">
@@ -253,10 +267,10 @@ if ($show_products->rowCount() > 0) {
                                 <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
                                 <div class="main-footer-icon-con">
                                   
-                                    <img src="Images\Facebook2.png" alt="" > 
+                                    <!-- <img src="Images\Facebook2.png" alt="" > 
                                    
                                    
-                                    <img src="Images\Email2.png" alt="" > 
+                                    <img src="Images\Email2.png" alt="" >  -->
                                   
                                  
                                 </div>   

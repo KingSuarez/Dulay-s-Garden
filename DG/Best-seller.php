@@ -12,17 +12,39 @@ if(!isset($user_id)){
 
 $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     if (isset($_POST['selected_items'])) {
+//         $_SESSION['checkout_items'] = $_POST['selected_items'];
+//         header("Location: checkout.php");
+//         exit();
+//     } else {
+//         //localhost will display or confirmation
+//     //    echo '<script>alert("Success")</script>';
+//     $_SESSION['show_alert'] = true;
+//     }
+// }
+
+// Initialize alert count if not set
+if (!isset($_SESSION['alert_count'])) {
+    $_SESSION['alert_count'] = 0;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['selected_items'])) {
         $_SESSION['checkout_items'] = $_POST['selected_items'];
         header("Location: checkout.php");
         exit();
     } else {
-        //localhost will display or confirmation
-    //    echo '<script>alert("Success")</script>';
-    $_SESSION['show_alert'] = true;
+        // Set the alert only if the count is less than 10
+        if ($_SESSION['alert_count'] < 2) {
+            $_SESSION['show_alert'] = true;
+            $_SESSION['alert_count']++;  // Increment alert count
+        } else {
+            $_SESSION['show_alert'] = false;
+        }
     }
 }
+
 
 if (isset($_POST['Acart'])) {
     $product_id = $_POST['Acart'];
@@ -114,6 +136,134 @@ if (isset($_POST['Acart'])) {
 .next {
     right: 15px;
 }
+
+/* For small screens (max-width: 480px) */  
+@media only screen and (max-width: 480px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 12px;  
+   zoom: 0.5;  
+
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 16px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}  
+  
+/* For extra small screens (max-width: 320px) */  
+@media only screen and (max-width: 320px) {  
+  /* Adjust font sizes and margins for better readability */  
+  body {  
+   font-size: 10px;  
+   zoom: 0.3;  
+  }  
+  h1, h2, h3, h4, h5, h6 {  
+   font-size: 14px;  
+  }  
+  .allUp {  
+   flex-direction: column;  
+  }  
+  .container {  
+   width: 100%;  
+  }  
+  .box1, .box2 {  
+   width: 100%;  
+  }  
+  .HomeBar {  
+   width: 100%;  
+  }  
+  .HomeBar ul {  
+   flex-direction: row;  
+  }  
+  .HomeBar li {  
+   width: 100%;  
+  }  
+  #whole {  
+   width: 100%;  
+  }  
+  #CategoriesSection {  
+   width: 100%;  
+  }  
+  .CategoriesSection_inner {  
+   flex-direction: row;  
+  }  
+  .card {  
+   width: 100%;  
+  }  
+  #Allproductsearch {  
+   width: 100%;  
+  }  
+  #productModal {  
+   width: 100%;  
+  }  
+  .modal-content {  
+   width: 100%;  
+  }  
+  .footer-con {  
+   width: 100%;  
+  }  
+  .pre-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con {  
+   width: 100%;  
+  }  
+  .main-footer-con-inner, .main-footer-con-inner2, .main-footer-con-inner3, .main-footer-con-inner4 {  
+   width: 100%;  
+  }  
+}
+
 </style>
 
  <!-- all contents are within this body Id Pagebody -->
@@ -125,7 +275,7 @@ if (isset($_POST['Acart'])) {
 <!-- div Class class contains div Classes such as Box1 with Id HomePanelUp  and Box2 with Id HomeProfile -->
 <div class=container>
     <div class="box1" id="HomePanelUp">
-    <a href="Homepage.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></></a>
+    <a href="Ahome.php"><img style="margin-top: 10px;" src="Images/IMG_1210 1-1.png" width="190px"></a>
     </div>
 
     <div class="box2" id="HomeProfile" style="text-decoration: none;"> 
@@ -253,7 +403,7 @@ if ($show_products->rowCount() > 0) {
                 <h6 style="padding: 0%;"><?= htmlspecialchars($fetch_products['category']); ?></h6>
                 <h1 style="font-size: medium; background-color:bisque; position:left;">Stock: <?= htmlspecialchars($fetch_products['stock']); ?></h1>
                 <h6 name="price">₱ <?= htmlspecialchars($fetch_products['price']); ?></h6>
-                <p>Total Sold: <?= htmlspecialchars($fetch_products['total_sold']); ?></p>
+                <p style="font-size: small; margin-bottom:2px;">Total Sold: <?= htmlspecialchars($fetch_products['total_sold']); ?></p>
                 <input type="hidden" name="Product_id" value="<?= htmlspecialchars($fetch_products['id']); ?>">
                 <div style="margin-right: 20px;">
                     <p><button id="<?= htmlspecialchars($fetch_products['id']); ?>" class="Cart" value="<?= htmlspecialchars($fetch_products['id']); ?>" name="Acart" type="submit">Add To Cart</button></p>
@@ -333,10 +483,10 @@ if ($show_products->rowCount() > 0) {
                                 <p>We are committed to bringing plants within your reach by carefully selecting individual ones that enhance your space. You have the opportunity to pick up these chosen plants from our location. We'll provide you with care guides tailored to the specific needs of your selected plants, ensuring they not only survive but thrive in your care.</p>
                                 <div class="main-footer-icon-con">
                                   
-                                    <img src="Images\Facebook2.png" alt="" > 
+                                    <!-- <img src="Images\Facebook2.png" alt="" > 
                                    
                                    
-                                    <img src="Images\Email2.png" alt="" > 
+                                    <img src="Images\Email2.png" alt="" >  -->
                                   
                                  
                                 </div>   
@@ -407,7 +557,7 @@ if ($show_products->rowCount() > 0) {
                 confirmButtonText: "Okay"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "Acart.php"; // Redirect to the cart page
+                    window.location.href = "Best-seller.php"; // Redirect to the cart page
                 }
             });
         });

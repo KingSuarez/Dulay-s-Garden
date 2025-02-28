@@ -38,6 +38,7 @@ function sendVerificationEmail($email, $verification_code) {
     }
 }
 
+
 if (isset($_POST['register'])) {
     $Fname = filter_var($_POST['Fname'], FILTER_SANITIZE_STRING);
     $Mname = filter_var($_POST['Mname'], FILTER_SANITIZE_STRING);
@@ -51,16 +52,24 @@ if (isset($_POST['register'])) {
     $image_tmp_name = $_FILES['image']['tmp_name'];
     $image_folder = 'img/' . $image;
 
-    $select = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-    $select->execute([$email]);
+    // Regular expression for strong password validation
+    $password_regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/";
 
-    if ($select->rowCount() > 0) {
-        $message[] = 'User email already exists!';
+    if (!ctype_digit($contact) || strlen($contact) != 11) {
+        $message[] = 'Contact number must be exactly 11 digits and should only contain numbers!';
+    } elseif (!preg_match($password_regex, $pass)) {
+        $message[] = 'Password must be at least 8 characters long, contain at least one uppercase letter,
+        <br> one lowercase letter, one digit, and one special character.';
+    } elseif ($pass !== $cpass) {
+        $message[] = 'Confirm password does not match!';
     } else {
-        if ($pass != $cpass) {
-            $message[] = 'Confirm password does not match!';
+        $select = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
+        $select->execute([$email]);
+
+        if ($select->rowCount() > 0) {
+            $message[] = 'User email already exists!';
         } else {
-            $verification_code = bin2hex(random_bytes(3)); // Generate a random verification code
+            $verification_code = bin2hex(random_bytes(3)); 
 
             $insert = $conn->prepare("INSERT INTO `users` (Fname, Mname, Lname, contact, email, password, image, verification_code, is_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)");
             $insert->execute([$Fname, $Mname, $Lname, $contact, $email, $pass, $image, $verification_code]);
@@ -71,13 +80,16 @@ if (isset($_POST['register'])) {
                 } else {
                     move_uploaded_file($image_tmp_name, $image_folder);
                     sendVerificationEmail($email, $verification_code);
-                    header("Location: verify.php?email=$email");
                     $message[] = 'Registered successfully! Please verify your email.';
+                    header("Location: verify.php?email=$email");
+                    exit();
                 }
             }
         }
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
